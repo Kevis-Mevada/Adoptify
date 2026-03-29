@@ -1,0 +1,344 @@
+/* Adoptify Custom Bootstrap Styles */
+:root {
+    --brand-50: #fffbeb;
+    --brand-100: #fef3c7;
+    --brand-500: #f59e0b;
+    --brand-600: #d97706;
+    --ink-800: #1f2937;
+    --ink-900: #111827;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--ink-800);
+    overflow-x: hidden;
+}
+
+/* Brand Button Override */
+.btn-brand {
+    background-color: var(--brand-500);
+    border-color: var(--brand-500);
+    color: white;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.btn-brand:hover {
+    background-color: var(--brand-600);
+    border-color: var(--brand-600);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+/* Navbar Customization */
+.navbar-brand img {
+    height: 60px;
+    /* Increased from 40px */
+    transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--ink-800) !important;
+    padding: 0.5rem 1.25rem !important;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-500) !important;
+}
+
+/* User Circle from Wireframe */
+.user-placeholder-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 100px 0;
+    color: white;
+    text-align: center;
+    background-color: var(--ink-900);
+    overflow: hidden;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    /* Use a placeholder image if needed, or actual background */
+    background-image: url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1600&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1.5rem;
+}
+
+/* About Us Section */
+.about-section {
+    padding: 80px 0;
+    background-color: white;
+}
+
+.about-img-container {
+    border-radius: 2rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-img-container img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Advertisement / 3-Column Section */
+.advert-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.advert-card {
+    border-radius: 2rem;
+    overflow: hidden;
+    height: 450px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.advert-card:hover {
+    transform: translateY(-10px);
+}
+
+.advert-card.img-card {
+    position: relative;
+}
+
+.advert-card.img-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.advert-card.text-card {
+    background-color: var(--brand-500);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--ink-900);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 80px 0 40px;
+    text-align: center;
+}
+
+.footer-logo {
+    height: 30px;
+    margin-bottom: 1.5rem;
+    filter: brightness(0) invert(1);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .about-img-container img {
+        height: 300px;
+        margin-top: 2rem;
+    }
+}
+
+/* Split Screen Login/Register */
+.split-screen-container {
+    min-height: 100vh;
+}
+
+.visual-side {
+    background-color: var(--brand-500);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    max-width: 500px;
+    /* Slightly wider */
+    padding: 3rem;
+    /* More padding */
+}
+
+.visual-overlay-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+    /* Slightly more opacity for better texture */
+    mix-blend-mode: multiply;
+    /* Better blending */
+    z-index: 1;
+}
+
+.form-side {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem;
+    /* More vertical padding */
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 500px;
+    /* Slightly wider for longer forms */
+    padding: 3.5rem;
+    /* More breathing room */
+    border-radius: 2.5rem;
+    background-color: white;
+    /* Premium subtle shadow */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+}
+
+.auth-icon-circle {
+    width: 64px;
+    height: 64px;
+    background-color: var(--brand-50);
+    color: var(--brand-500);
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+}
+
+.form-floating>.form-control:focus~label {
+    color: var(--brand-500);
+}
+
+.form-control:focus {
+    border-color: var(--brand-500);
+    box-shadow: 0 0 0 0.25rem rgba(245, 158, 11, 0.1);
+}
+
+/* Field Border Styling */
+.auth-card .form-control {
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.auth-card .form-control:focus {
+    border-color: var(--brand-500);
+    background-color: white;
+}
+
+.auth-stat-badge {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 1rem;
+    padding: 0.75rem 1.25rem;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0.5rem;
+}
+
+/* Registration Steps Timeline */
+.reg-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+    margin-top: 2.5rem;
+}
+
+.reg-step-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    opacity: 0.9;
+}
+
+.reg-step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.reg-step-text {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* NGO Conditional Fields */
+#ngo-fields {
+    transition: all 0.3s ease-in-out;
+}
+
+.ngo-fields-container {
+    padding: 1.5rem;
+    background-color: var(--brand-50);
+    border-radius: 1.5rem;
+    border: 2px dashed var(--brand-100);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+@media (max-width: 991.98px) {
+    .visual-side {
+        display: none;
+    }
+}

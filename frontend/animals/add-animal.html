@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Animal for Adoption | Adoptify</title>
+    <!-- CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/add-animal.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../animals/browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="../animals/add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item" href="../rescue/report.html">Rescue Animal</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="../animals/sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="../animals/received-requests.html">Received Request</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="container py-5">
+        <!-- Page Header -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 text-center">
+                <h1 class="fw-black display-5 mb-2">List Your Animal for Adoption</h1>
+                <p class="text-muted fs-5">Help them find a loving forever home</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <form id="addAnimalForm">
+                    <!-- Section 1: Basic Information -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-paw"></i> Basic Information</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Animal Name *</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter animal name" required>
+                                    <div class="invalid-feedback">Name is required</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Species *</label>
+                                    <select name="species" class="form-select" required>
+                                        <option value="" selected disabled>Select species</option>
+                                        <option value="DOG">Dog</option>
+                                        <option value="CAT">Cat</option>
+                                        <option value="BIRD">Bird</option>
+                                        <option value="RABBIT">Rabbit</option>
+                                        <option value="OTHER">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Breed</label>
+                                    <input type="text" name="breed" class="form-control" placeholder="e.g., Labrador, Persian">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form-label">Age - Years *</label>
+                                        <input type="number" name="ageYears" class="form-control" min="0" max="30" value="0" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label">Age - Months *</label>
+                                        <input type="number" name="ageMonths" class="form-control" min="0" max="11" value="0" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Gender *</label>
+                                    <select name="gender" class="form-select" required>
+                                        <option value="" selected disabled>Select gender</option>
+                                        <option value="MALE">Male</option>
+                                        <option value="FEMALE">Female</option>
+                                        <option value="UNKNOWN">Unknown</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Size *</label>
+                                    <select name="size" class="form-select" required>
+                                        <option value="" selected disabled>Select size</option>
+                                        <option value="SMALL">Small</option>
+                                        <option value="MEDIUM">Medium</option>
+                                        <option value="LARGE">Large</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Color</label>
+                                    <input type="text" name="color" class="form-control" placeholder="e.g., Golden, Black & White">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Location/City *</label>
+                                    <input type="text" name="location" class="form-control" placeholder="e.g., Mumbai, Delhi" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Health & Behavior -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-heart-pulse"></i> Health & Behavior</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="row row-cols-1 g-3 mb-4">
+                                    <div class="col">
+                                        <div class="form-check form-switch custom-switch">
+                                            <input class="form-check-input" type="checkbox" name="vaccinated" id="checkVaccinated">
+                                            <label class="form-check-label fw-medium ms-2" for="checkVaccinated">Vaccinated</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check form-switch custom-switch">
+                                            <input class="form-check-input" type="checkbox" name="dewormed" id="checkDewormed">
+                                            <label class="form-check-label fw-medium ms-2" for="checkDewormed">Dewormed</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check form-switch custom-switch">
+                                            <input class="form-check-input" type="checkbox" name="neutered" id="checkNeutered">
+                                            <label class="form-check-label fw-medium ms-2" for="checkNeutered">Neutered/Spayed</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check form-switch custom-switch">
+                                            <input class="form-check-input" type="checkbox" name="goodWithKids" id="checkKids">
+                                            <label class="form-check-label fw-medium ms-2" for="checkKids">Good with Kids</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-check form-switch custom-switch">
+                                            <input class="form-check-input" type="checkbox" name="goodWithPets" id="checkPets">
+                                            <label class="form-check-label fw-medium ms-2" for="checkPets">Good with Other Pets</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Health Status</label>
+                                    <textarea name="healthStatus" class="form-control" rows="2" placeholder="Describe any health conditions"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Special Needs</label>
+                                    <textarea name="specialNeeds" class="form-control" rows="2" placeholder="Any special care requirements"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Behavior Notes</label>
+                                    <textarea name="behaviorNotes" class="form-control" rows="2" placeholder="Temperament, likes, dislikes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Description & Listing -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-file-lines"></i> Description & Listing</h3>
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Description * (Minimum 50 characters)</label>
+                                    <textarea name="description" class="form-control" rows="5" placeholder="Tell us about their personality, story, and why they need a home..." minlength="50" required></textarea>
+                                    <div class="form-text mt-2 d-flex justify-content-between">
+                                        <span>Be detailed to increase adoption chances!</span>
+                                        <span id="charCount">0 characters</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Adoption Fee * (Enter 0 for free)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-2 border-end-0">₹</span>
+                                    <input type="number" name="adoptionFee" class="form-control border-start-0" min="0" placeholder="0" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Exact Address/Area *</label>
+                                <textarea name="address" class="form-control" rows="2" placeholder="Full address or specific area name" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Photo Upload -->
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-camera"></i> Photos</h3>
+                        <p class="text-muted mb-4">Upload at least 1 photo. Max 5 photos. First photo will be the main profile picture.</p>
+                        
+                        <div class="upload-zone" id="uploadZone">
+                            <input type="file" id="fileInput" multiple accept="image/*" class="d-none">
+                            <div class="upload-icon">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h5 class="fw-bold">Drag & drop photos here</h5>
+                            <p class="text-muted small">or click to browse from your device</p>
+                            <p class="text-muted smaller mt-2">Max file size: 5MB (JPG, PNG, WebP)</p>
+                        </div>
+
+                        <div id="previewContainer" class="preview-container">
+                            <!-- Previews will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Section 5: Submit -->
+                    <div class="form-section bg-light">
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                            <label class="form-check-label fw-medium ms-2" for="termsCheck">
+                                I confirm that all information provided is accurate and this animal is genuinely available for adoption.
+                            </label>
+                        </div>
+                        
+                        <div class="d-flex flex-column flex-md-row gap-3">
+                            <button type="submit" id="submitBtn" class="btn btn-brand-lg flex-grow-1">
+                                <span class="spinner-border spinner-border-sm d-none" id="btnSpinner" role="status"></span>
+                                <span id="btnText">PUBLISH LISTING</span>
+                            </button>
+                            <a href="browse.html" class="btn btn-light border fw-bold px-5 py-3 rounded-pill">CANCEL</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" data-bs-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 p-4 text-center">
+                <div class="modal-body">
+                    <div class="mb-4 text-warning" style="font-size: 5rem;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h2 class="fw-black mb-3">CONGRATULATIONS!</h2>
+                    <p class="text-muted fs-5 mb-5">Your animal has been listed successfully! They are now waiting for a loving home.</p>
+                    <div class="d-flex flex-column gap-2">
+                        <a href="browse.html" class="btn btn-brand-lg w-100">Browse Listings</a>
+                        <button type="button" class="btn btn-light fw-bold py-3" onclick="location.reload()">Add Another Animal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/add-animal.js"></script>
+</body>
+
+</html>

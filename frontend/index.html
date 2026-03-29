@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adoptify - Helping Hands for Paws</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./asset/css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="./asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="animals/browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="animals/add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item" href="rescue/report.html">Rescue Animal</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="animals/sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="animals/received-requests.html">Received Request</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero-section">
+        <div class="hero-bg-overlay"></div>
+        <div class="container hero-content">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Give a Second Chance to a Furry Friend</h1>
+                    <p class="fs-4 mb-5 opacity-75">Connect with rescued animals and find your lifetime companion today.
+                        Every paw deserves a loving hand.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="animals/browse.html" class="btn btn-brand btn-lg px-5">ADOPT A PET</a>
+                        <a href="rescue/report.html"
+                            class="btn btn-outline-light btn-lg rounded-pill px-5 border-2 fw-bold">RESCUE ANIMAL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h5 class="text-warning fw-bold mb-3">#WHO WE ARE</h5>
+                    <h2 class="display-4 fw-black mb-4">We're on a Mission to Save Every Life</h2>
+                    <p class="text-muted fs-5 mb-4">Adoptify is a community-driven platform dedicated to animal welfare.
+                        We bridge the gap between animal rescuers and potential adopters, ensuring a transparent and
+                        loving transition for every pet.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-img-container">
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop"
+                            alt="Happy Pets">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVERTISEMENT / 3-COLUMN SECTION -->
+    <section class="advert-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Col 1: Image -->
+                <div class="col-lg-4">
+                    <div class="advert-card img-card">
+                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=800&auto=format&fit=crop"
+                            alt="Adopt Animal">
+                    </div>
+                </div>
+
+                <!-- Col 2: Advertisement Text -->
+                <div class="col-lg-4">
+                    <div class="advert-card text-card text-center">
+                        <i class="fa-solid fa-paw fs-1 mb-4"></i>
+                        <h3 class="fw-black mb-4">Find Your Best Friend Today!</h3>
+                        <p class="mb-4 opacity-90">Hundreds of animal are waiting for a new home. Join our mission to
+                            rescue and rehome animals in need.</p>
+                        <a href="animals/browse.html" class="btn btn-light rounded-pill fw-bold py-3 text-brand">BROWSE
+                            NOW</a>
+                    </div>
+                </div>
+
+                <!-- Col 3: Image -->
+                <div class="col-lg-4">
+                    <div class="advert-card img-card">
+                        <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?q=80&w=800&auto=format&fit=crop"
+                            alt="Rescue Animal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <img src="./asset/Images/logo.png" alt="Adoptify Logo" class="footer-logo">
+            <h3 class="text-white mb-4 fw-bold">Adoptify</h3>
+            <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
+                <a href="index.html" class="text-decoration-none text-white-50 hover-brand">Home</a>
+                <a href="animals/browse.html" class="text-decoration-none text-white-50 hover-brand">Adopt</a>
+                <a href="rescue/report.html" class="text-decoration-none text-white-50 hover-brand">Rescue</a>
+                <a href="#about" class="text-decoration-none text-white-50 hover-brand">About us</a>
+            </div>
+            <hr class="border-secondary opacity-25 mb-4 mx-auto" style="max-width: 800px;">
+            <p class="small mb-0 opacity-50">&copy; 2026 Adoptify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="./asset/js/main.js"></script>
+</body>
+
+</html>

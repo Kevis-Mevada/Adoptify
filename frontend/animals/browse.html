@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Animals - Adoptify</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/browse-animals.css">
+</head>
+
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo" style="height: 60px;">
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item" href="../rescue/report.html">Rescue Animal</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item active" href="sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="received-requests.html">Received Request</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <header class="browse-hero">
+        <div class="container">
+            <div class="hero-content text-center py-5">
+                <h1 class="display-3 fw-black text-white mb-4">Find Your Perfect Companion</h1>
+                <div class="search-container">
+                    <div class="search-box-combined shadow-lg">
+                        <div class="input-group">
+                            <span class="input-group-text"><i
+                                    class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" id="searchInput" class="form-control"
+                                placeholder="Search by name, breed...">
+                            <div class="divider"></div>
+                            <span class="input-group-text"><i class="fa-solid fa-location-dot text-muted"></i></span>
+                            <input type="text" id="locationInput" class="form-control" placeholder="City or area">
+                            <button class="btn btn-brand px-5 py-3 ms-2" type="button" id="searchBtn">SEARCH</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+            <div class="results-info">
+                <h3 class="fw-bold mb-0" id="resultsCount">Showing 0 animals</h3>
+                <p class="text-muted mb-0 small mt-1">Found the following animals for you</p>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <label for="sortBy" class="text-nowrap small fw-bold text-muted">SORT BY:</label>
+                <select id="sortBy" class="form-select border-0 shadow-sm rounded-3 py-2 px-3 fw-medium"
+                    style="width: 200px;">
+                    <option value="createdAt,desc">Newest First</option>
+                    <option value="createdAt,asc">Oldest First</option>
+                    <option value="adoptionFee,asc">Price: Low to High</option>
+                    <option value="adoptionFee,desc">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Animal Grid -->
+        <div class="row g-4" id="animalGrid">
+            <!-- Dynamic cards injected here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-5 d-none">
+            <div class="empty-state-icon mb-4">
+                <i class="fa-solid fa-paw text-muted opacity-20" style="font-size: 100px;"></i>
+            </div>
+            <h3 class="fw-bold">No animals found</h3>
+            <p class="text-muted fs-5">We couldn't find any animals matching your search criteria.</p>
+            <button class="btn btn-brand px-5 py-3 mt-3 rounded-4 fw-bold" onclick="resetSearch()">RESET SEARCH</button>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-5 d-flex justify-content-center" id="pagination"></div>
+    </main>
+
+    <!-- ANIMAL DETAILS & ADOPTION MODAL -->
+    <div class="modal fade" id="animalModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content overflow-hidden border-0 shadow-2xl">
+                <!-- Close btn -->
+                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="modal-body p-0">
+                    <div class="row g-0 h-100">
+                        <!-- Left Section: Gallery -->
+                        <div class="col-lg-5 bg-light p-4 p-md-5">
+                            <div class="modal-gallery">
+                                <div class="main-img-container mb-4 shadow-sm">
+                                    <img id="modalMainImg" src="" alt="Animal"
+                                        class="img-fluid w-100 h-100 object-fit-cover">
+                                    <span id="modalStatusBadge" class="modal-status-badge"></span>
+                                </div>
+                                <div class="thumbnail-strip d-flex gap-2 overflow-auto pb-2" id="modalThumbnails">
+                                    <!-- Thumbnails -->
+                                </div>
+                            </div>
+                            <div class="mt-5 p-4 bg-white rounded-4 shadow-sm text-center">
+                                <h6 class="text-muted small fw-bold text-uppercase mb-2">Adoption Fee</h6>
+                                <h2 id="modalPrice" class="display-6 fw-black text-brand mb-0">₹0</h2>
+                            </div>
+                        </div>
+
+                        <!-- Right Section: Info & Tabs -->
+                        <div class="col-lg-7 p-4 p-md-5">
+                            <div class="modal-info-header mb-4">
+                                <h2 id="modalName" class="display-4 fw-black mb-1">Name</h2>
+                                <p id="modalBreedName" class="fs-5 text-muted mb-0">Breed</p>
+                            </div>
+
+                            <!-- Nav Pills Tabs -->
+                            <ul class="nav nav-pills modal-tabs mb-4 p-1" id="modalTab" role="tablist">
+                                <li class="nav-item flex-fill text-center" role="presentation">
+                                    <button class="nav-link active w-100 py-3 fw-bold" id="about-tab"
+                                        data-bs-toggle="pill" data-bs-target="#about-pane" type="button"
+                                        role="tab">ABOUT ANIMAL</button>
+                                </li>
+                                <li class="nav-item flex-fill text-center" role="presentation">
+                                    <button class="nav-link w-100 py-3 fw-bold" id="form-tab" data-bs-toggle="pill"
+                                        data-bs-target="#form-pane" type="button" role="tab">ADOPTION FORM</button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content" id="modalTabContent">
+                                <!-- Tab 1: About -->
+                                <div class="tab-pane fade show active" id="about-pane" role="tabpanel">
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Owner</label>
+                                                <p id="m-owner">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Species</label>
+                                                <p id="m-species">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Breed</label>
+                                                <p id="m-breed">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Age</label>
+                                                <p id="m-age">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Gender</label>
+                                                <p id="m-gender">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Size</label>
+                                                <p id="m-size">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Color</label>
+                                                <p id="m-color">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Location</label>
+                                                <p id="m-location">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Vaccinated</label>
+                                                <p id="m-vac">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Dewormed</label>
+                                                <p id="m-dew">-</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="details-grid-item"><label>Neutered</label>
+                                                <p id="m-neu">-</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h6 class="fw-bold mb-3">Description</h6>
+                                    <p id="m-desc" class="text-muted leading-relaxed">-</p>
+                                    <div class="d-flex flex-wrap mt-4" id="healthBadges">
+                                        <!-- Health badges -->
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2: Form -->
+                                <div class="tab-pane fade" id="form-pane" role="tabpanel">
+                                    <div id="logged-out-msg" class="text-center py-5 d-none">
+                                        <div class="mb-4"><i class="fa-solid fa-lock text-muted fs-1 opacity-25"></i>
+                                        </div>
+                                        <h4 class="fw-bold">Login Required</h4>
+                                        <p class="text-muted">Please login to submit an adoption request.</p>
+                                        <a href="../auth/login.html" class="btn btn-brand px-4 py-2 mt-2">LOGIN NOW</a>
+                                    </div>
+
+                                    <form id="adoptionRequestForm">
+                                        <input type="hidden" name="animalId" id="adIdInForm">
+
+                                        <!-- Section 1: Personal -->
+                                        <h6 class="form-section-title">Personal Information</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">Full Name</label>
+                                                <input type="text" id="adName" class="form-control" readonly>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">Email</label>
+                                                <input type="email" id="adEmail" class="form-control" readonly>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">Phone *</label>
+                                                <input type="tel" name="adopterContactPhone" class="form-control"
+                                                    placeholder="9876543210" required>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">City *</label>
+                                                <input type="text" name="city" class="form-control" required>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label small fw-bold">Full Address *</label>
+                                                <textarea name="address" class="form-control" rows="2"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section 2: Home -->
+                                        <h6 class="form-section-title">Home & Lifestyle</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">Living Situation *</label>
+                                                <select name="livingSituation" class="form-select" required>
+                                                    <option value="APARTMENT">Apartment</option>
+                                                    <option value="HOUSE">House</option>
+                                                    <option value="FARM">Farm</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold d-block">Do you have a yard?
+                                                    *</label>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasYard"
+                                                        value="true" id="yardY" required>
+                                                    <label class="form-check-label" for="yardY">Yes</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasYard"
+                                                        value="false" id="yardN">
+                                                    <label class="form-check-label" for="yardN">No</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold d-block">Other pets? *</label>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasOtherPets"
+                                                        value="true" id="petsY" onchange="togglePETS(true)" required>
+                                                    <label class="form-check-label" for="petsY">Yes</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasOtherPets"
+                                                        value="false" id="petsN" onchange="togglePETS(false)">
+                                                    <label class="form-check-label" for="petsN">No</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-2 d-none" id="petsDetailContainer">
+                                                <label class="form-label small fw-bold">Please describe your other
+                                                    pets</label>
+                                                <textarea name="otherPetsDetail" class="form-control"
+                                                    rows="2"></textarea>
+                                            </div>
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold d-block">Hand pets before?
+                                                    *</label>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasExperience"
+                                                        value="true" id="expY" onchange="toggleEXP(true)" required>
+                                                    <label class="form-check-label" for="expY">Yes</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mt-1">
+                                                    <input class="form-check-input" type="radio" name="hasExperience"
+                                                        value="false" id="expN" onchange="toggleEXP(false)">
+                                                    <label class="form-check-label" for="expN">No</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mb-2 d-none" id="expDetailContainer">
+                                                <label class="form-label small fw-bold">Please describe your pet
+                                                    experience</label>
+                                                <textarea name="experienceDetail" class="form-control"
+                                                    rows="2"></textarea>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label class="form-label small fw-bold">Hours pet will be alone daily
+                                                    *</label>
+                                                <input type="number" name="dailyHoursAlone" class="form-control" min="0"
+                                                    max="24" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section 3: Adoption Details -->
+                                        <h6 class="form-section-title">Adoption Details</h6>
+                                        <div class="col-12 mb-4">
+                                            <label class="form-label small fw-bold">Why do you want to adopt? *</label>
+                                            <textarea name="reasonForAdoption" class="form-control" rows="4"
+                                                required></textarea>
+                                        </div>
+                                        <div class="col-12 mb-4">
+                                            <label class="form-label small fw-bold">Additional Notes</label>
+                                            <textarea name="additionalNotes" class="form-control" rows="3"></textarea>
+                                        </div>
+
+                                        <!-- Section 4: Meeting -->
+                                        <h6 class="form-section-title">Meeting Arrangement</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-6 mb-2">
+                                                <label class="form-label small fw-bold">Preferred Date *</label>
+                                                <input type="date" name="preferredMeetingDate" id="meetingDate"
+                                                    class="form-control" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label small fw-bold">Meeting Address
+                                                    (optional)</label>
+                                                <textarea name="meetingAddress" class="form-control"
+                                                    rows="2"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- Section 5: Agreement -->
+                                        <h6 class="form-section-title">Agreement</h6>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="checkbox" id="agree1" required>
+                                            <label class="form-check-label small" for="agree1">I confirm all information
+                                                is accurate and true.</label>
+                                        </div>
+                                        <div class="form-check mb-4">
+                                            <input class="form-check-input" type="checkbox" id="agree2" required>
+                                            <label class="form-check-label small" for="agree2">I agree to provide a
+                                                loving and safe home for this pet.</label>
+                                        </div>
+
+                                        <div class="d-flex gap-3 pt-3">
+                                            <button type="submit"
+                                                class="btn btn-brand flex-fill py-3 rounded-4 shadow-sm">SUBMIT ADOPTION
+                                                REQUEST</button>
+                                            <button type="button"
+                                                class="btn btn-light px-4 py-3 rounded-4 text-muted fw-bold"
+                                                data-bs-dismiss="modal">CANCEL</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-5 p-4 text-center">
+                <div class="mb-4">
+                    <div class="success-icon-burst"><i class="fa-solid fa-check"></i></div>
+                </div>
+                <h2 class="fw-black mb-3">Adoption Request Sent!</h2>
+                <p class="text-muted fs-5 mb-5 px-3">Your request has been sent to the owner. You will receive email
+                    notification when they respond.</p>
+                <div class="d-grid gap-3">
+                    <a href="my-adoptions.html" class="btn btn-brand py-3 rounded-4 fw-bold shadow-sm">VIEW MY
+                        REQUESTS</a>
+                    <button class="btn btn-light py-3 rounded-4 fw-bold text-muted"
+                        data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container text-center py-4">
+            <img src="../asset/Images/logo.png" style="height: 40px; filter: brightness(0) invert(1);"
+                alt="Adoptify Logo" class="mb-4">
+            <p class="opacity-50 mb-0">&copy; 2026 Adoptify. All rights reserved. Helping hands for paws.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/browse-animals.js"></script>
+</body>
+
+</html>
