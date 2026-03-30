@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStatus = 'ALL';
     let currentPage = 0;
     const pageSize = 10;
+    let allRequests = [];
 
     const filterTabs = document.getElementById('filterTabs');
     const requestsBody = document.getElementById('requestsBody');
@@ -99,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const items = Array.isArray(data) ? data : (data.content || []);
             
             updateTableHeaders();
+            allRequests = items;
             renderItems(items);
             
             if (data.totalPages && currentCategory === 'ADOPTIONS') {
@@ -227,10 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.viewDetails = (id) => {
-        const req = allRequests.find(r => r.id === id);
-        if (!req) return;
+        const requestId = Number(id);
+        const req = allRequests.find(r => r.id == requestId);
+        if (!req) {
+            console.error("Request not found for ID:", id, "Available IDs:", allRequests.map(r => r.id));
+            return;
+        }
 
-        document.getElementById('modalAnimalImg').src = req.animalImage ? `${IMAGE_BASE_URL}${req.animalImage}` : '../asset/Images/placeholder-animal.png';
+        document.getElementById('modalAnimalImg').src = getFullImageUrl(req.animalImage) || '../asset/Images/placeholder-animal.png';
         document.getElementById('modalAnimalName').innerText = req.animalName;
         const badge = document.getElementById('modalStatusBadge');
         badge.innerText = req.requestStatus;
@@ -274,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const modalActions = document.getElementById('modalActions');
-        modalActions.innerHTML = getActionButtons(req);
+        modalActions.innerHTML = getAdoptionActions(req);
         
         viewDetailsModal.show();
     };
@@ -286,7 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.contactOwner = (id) => {
-        const req = allRequests.find(r => r.id === id);
+        const requestId = Number(id);
+        const req = allRequests.find(r => r.id == requestId);
         if (!req) return;
         
         document.getElementById('contactOwnerName').innerText = req.ownerName;
@@ -445,7 +452,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchRequests();
     };
 
-    let allRequests = [];
 
     // Initial Fetch
     fetchRequests();

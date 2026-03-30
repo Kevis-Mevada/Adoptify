@@ -101,7 +101,7 @@ function setupScrollAnimations() {
 /**
  * Global Helper to resolve relative image URLs to the server
  */
-function getFullImageUrl(url) {
+window.getFullImageUrl = (url) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
     // Check if it's a relative upload path
@@ -109,4 +109,4 @@ function getFullImageUrl(url) {
         return `http://localhost:8080${url}`;
     }
     return url;
-}
+};

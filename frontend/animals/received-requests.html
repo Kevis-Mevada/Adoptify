@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Received Adoption Requests | Adoptify</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/sent-requests.css">
+</head>
+
+<body>
+    <!-- HEADER / NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item" href="../rescue/report.html">Rescue Animal</a></li>
+                            <li><a class="dropdown-item" href="listed-animals.html">Listed Animals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item active" href="received-requests.html">Received Request</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="sent-requests-container container">
+        <!-- Page Header -->
+        <header class="page-header text-center text-lg-start">
+            <h1 class="fw-black display-5 mb-2">Received Adoption Requests</h1>
+            <p class="text-muted fs-5">Manage adoption requests from people wishing to adopt your listed animals</p>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-btn active" data-status="ALL">All</button>
+            <button class="filter-btn" data-status="PENDING">Pending</button>
+            <button class="filter-btn" data-status="APPROVED">Approved</button>
+            <button class="filter-btn" data-status="REJECTED">Rejected</button>
+            <button class="filter-btn" data-status="COMPLETED">Completed</button>
+            <button class="filter-btn" data-status="CANCELLED">Cancelled</button>
+        </div>
+
+        <!-- Requests Content -->
+        <div class="request-list-container" id="requestsContainer">
+            <!-- Loading State -->
+            <div id="loadingState" class="p-5 text-center">
+                <div class="spinner-border text-warning mb-3" role="status"></div>
+                <p class="text-muted fw-medium">Loading requests...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state d-none">
+                <div class="empty-icon text-muted">📭</div>
+                <h3 class="fw-bold">No requests found</h3>
+                <p class="text-muted mb-4 px-3">You haven't received any adoption requests in this category yet.</p>
+                <a href="add-animal.html" class="btn btn-brand px-5 py-3 rounded-pill fw-bold">LIST AN ANIMAL</a>
+            </div>
+
+            <!-- Table List -->
+            <div id="listContent" class="d-none">
+                <table class="request-table">
+                    <thead>
+                        <tr>
+                            <th>Animal & Adopter</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requestsBody">
+                        <!-- Requests will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div id="paginationContainer" class="d-none mt-5">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center gap-2" id="pagination">
+                    <!-- Pagination links will be injected here -->
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <!-- DETAILS MODAL -->
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content overflow-hidden">
+                <div class="modal-header border-0 bg-light">
+                    <h5 class="modal-title fw-black">Adoption Request Details</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="detailsModalContent">
+                    <!-- Dynamic Content -->
+                </div>
+                <div class="modal-footer border-0 bg-light" id="detailsModalFooter">
+                    <!-- Dynamic Buttons -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REJECT MODAL -->
+    <div class="modal fade" id="rejectModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title fw-bold">Reject Request</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Please provide a feedback or reason for rejecting this request.</p>
+                    <textarea id="rejectionReason" class="form-control" rows="4" placeholder="Enter reason here..."></textarea>
+                    <input type="hidden" id="rejectId">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light fw-bold px-4 rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger fw-bold px-4 rounded-pill" id="confirmReject">CONFIRM REJECT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    <div class="modal fade" id="contactModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-black">Contact Adopter</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center" id="contactModalContent">
+                    <!-- Contact Content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/received-requests.js"></script>
+</body>
+
+</html>

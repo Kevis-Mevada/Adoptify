@@ -67,6 +67,10 @@ public class Animal {
     @Builder.Default
     private List<AnimalImage> images = new ArrayList<>();
 
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<AdoptionRequest> adoptionRequests = new ArrayList<>();
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

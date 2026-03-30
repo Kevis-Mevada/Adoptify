@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listed Animals | Adoptify</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/sent-requests.css">
+    <style>
+        .badge-available { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .badge-hold { background-color: rgba(100, 116, 139, 0.1); color: #64748b; }
+        .view-stat {
+            background: #f8fafc;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER / NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="animalActionDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item" href="../rescue/report.html">Rescue Animal</a></li>
+                            <li><a class="dropdown-item active" href="listed-animals.html">Listed Animals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="received-requests.html">Received Request</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2 text-dark">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="sent-requests-container container">
+        <!-- Page Header -->
+        <header class="page-header text-center text-lg-start">
+            <h1 class="fw-black display-5 mb-2">My Listed Animals</h1>
+            <p class="text-muted fs-5">Manage the animals you have put up for adoption</p>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-btn active" data-status="ALL">All</button>
+            <button class="filter-btn" data-status="AVAILABLE">Available</button>
+            <button class="filter-btn" data-status="PENDING">Pending</button>
+            <button class="filter-btn" data-status="ADOPTED">Adopted</button>
+            <button class="filter-btn" data-status="HOLD">On Hold</button>
+        </div>
+
+        <!-- Content Area -->
+        <div class="request-list-container" id="animalsContainer">
+            <!-- Loading State -->
+            <div id="loadingState" class="p-5 text-center">
+                <div class="spinner-border text-brand mb-3" role="status"></div>
+                <p class="text-muted fw-medium">Loading your listings...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state d-none">
+                <div class="empty-icon text-muted">🐾</div>
+                <h3 class="fw-bold">No listed animals yet</h3>
+                <p class="text-muted mb-4 px-3">You haven't listed any animals for adoption yet.</p>
+                <a href="add-animal.html" class="btn btn-brand px-5 py-3 rounded-pill fw-bold">LIST AN ANIMAL</a>
+            </div>
+
+            <!-- Table -->
+            <div id="listContent" class="d-none">
+                <table class="request-table">
+                    <thead>
+                        <tr>
+                            <th>Animal Details</th>
+                            <th>Date Posted</th>
+                            <th>Status</th>
+                            <th>Views</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="animalsBody">
+                        <!-- Content via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/listed-animals.js"></script>
+</body>
+
+</html>

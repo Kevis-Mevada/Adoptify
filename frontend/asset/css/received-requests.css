@@ -1,0 +1,58 @@
+/* Received Requests Page Styles */
+
+:root {
+    --status-pending: #ffc107;
+    --status-approved: #198754;
+    --status-rejected: #dc3545;
+    --status-completed: #0d6efd;
+    --status-cancelled: #6c757d;
+}
+
+.status-pending { background-color: rgba(255, 193, 7, 0.1) !important; color: var(--status-pending) !important; border: 1px solid rgba(255, 193, 7, 0.2); }
+.status-approved { background-color: rgba(25, 135, 84, 0.1) !important; color: var(--status-approved) !important; border: 1px solid rgba(25, 135, 84, 0.2); }
+.status-rejected { background-color: rgba(220, 53, 69, 0.1) !important; color: var(--status-rejected) !important; border: 1px solid rgba(220, 53, 69, 0.2); }
+.status-completed { background-color: rgba(13, 110, 253, 0.1) !important; color: var(--status-completed) !important; border: 1px solid rgba(13, 110, 253, 0.2); }
+.status-cancelled { background-color: rgba(108, 117, 125, 0.1) !important; color: var(--status-cancelled) !important; border: 1px solid rgba(108, 117, 125, 0.2); }
+
+.btn-outline-brand {
+    border-color: #F59E0B;
+    color: #F59E0B;
+}
+
+.btn-outline-brand:hover, .btn-outline-brand.active {
+    background-color: #F59E0B;
+    color: white;
+}
+
+.skeleton-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite linear;
+    border: none;
+}
+
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.table th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #64748b;
+    padding: 1rem;
+}
+
+.table td {
+    padding: 1.25rem 1rem;
+}
+
+.modal-header.bg-danger {
+    background-color: #ef4444 !important;
+}
+
+.btn-white {
+    background: white;
+}
