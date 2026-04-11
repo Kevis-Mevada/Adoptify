@@ -3,6 +3,7 @@ package com.adoptify.backend.repository;
 import com.adoptify.backend.model.AdoptionStatus;
 import com.adoptify.backend.model.Animal;
 import com.adoptify.backend.model.Species;
+import com.adoptify.backend.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,6 +21,8 @@ public interface AnimalRepository extends JpaRepository<Animal, Long> {
     List<Animal> findByOwnerId(Long ownerId);
 
     List<Animal> findByStatus(AdoptionStatus status);
+
+    long countByOwner(User owner);
 
     List<Animal> findBySpeciesAndStatus(Species species, AdoptionStatus status);
 

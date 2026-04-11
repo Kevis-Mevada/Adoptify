@@ -19,10 +19,12 @@ public class RescueResponse {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rescue_report_id", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private RescueReport rescueReport;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "responder_id", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User responder;
 
     @Enumerated(EnumType.STRING)

@@ -33,4 +33,6 @@ public interface AdoptionRequestRepository extends JpaRepository<AdoptionRequest
 
     @Query("SELECT COUNT(a) FROM AdoptionRequest a WHERE a.owner.id = :ownerId AND a.requestStatus = 'PENDING'")
     Long countPendingRequestsByOwnerId(@Param("ownerId") Long ownerId);
+
+    long countByRequestStatus(RequestStatus status);
 }

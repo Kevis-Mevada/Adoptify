@@ -102,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function redirectUser(role) {
         switch (role) {
             case 'ADMIN':
-                window.location.href = '../admin.html';
+                window.location.href = '../admin/admin-dashboard.html';
                 break;
             case 'NGO':
-                window.location.href = '../ngo-dashboard.html';
+                window.location.href = '../ngo/ngo-dashboard.html';
                 break;
             case 'REGULAR_USER':
             default:

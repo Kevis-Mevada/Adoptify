@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rescue Center | Adoptify</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/rescue.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <!-- HEADER / NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../animals/browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="../animals/add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item active" href="rescue.html">Rescue Animal</a></li>
+                            <li><a class="dropdown-item" href="../animals/listed-animals.html">Listed Animals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="../animals/sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="../animals/received-requests.html">Received Request</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <!-- Hero Section -->
+        <div class="hero-rescue row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="fw-black display-4 mb-3">Be a Hero Today.</h1>
+                <p class="text-muted fs-5 mb-4">Every life matters. If you see an animal in distress, report it
+                    immediately. Our network of NGOs and volunteers is ready to step in.</p>
+                <button class="btn btn-brand px-5 py-3 fw-bold rounded-pill" onclick="triggerReportTab()">Report
+                    Now</button>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <img src="../asset/Images/rescue_hero_bg.png" alt="Rescue Hero" class="hero-img">
+            </div>
+        </div>
+
+        <!-- TABS -->
+        <div class="d-flex gap-3 mb-5 overflow-auto pb-2" id="rescueTabs" role="tablist">
+            <button class="btn-tab active" id="report-tab" data-bs-toggle="pill" data-bs-target="#tab-report">Report
+                Rescue</button>
+            <button class="btn-tab" id="status-tab" data-bs-toggle="pill" data-bs-target="#tab-status"
+                onclick="loadStatusRescues()">Status</button>
+            <button class="btn-tab" id="history-tab" data-bs-toggle="pill" data-bs-target="#tab-history"
+                onclick="loadHistoryRescues()">History</button>
+        </div>
+
+        <div class="tab-content">
+            <!-- TAB 1: REPORT -->
+            <div class="tab-pane fade show active" id="tab-report">
+                <div class="guide-box">
+                    <h4 class="fw-black mb-3">How to Rescue?</h4>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3">
+                            <div class="card border-0 bg-light-subtle p-3 h-100 rounded-4">
+                                <div class="bg-warning-subtle text-warning rounded-pill p-2 px-3 fw-black mb-3 d-inline-block"
+                                    style="width: fit-content;">01</div>
+                                <h6 class="fw-black mb-2">Check Safety</h6>
+                                <p class="small text-muted mb-0">Don't approach if the animal is aggressive. Stay at a
+                                    safe distance.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 bg-light-subtle p-3 h-100 rounded-4">
+                                <div class="bg-warning-subtle text-warning rounded-pill p-2 px-3 fw-black mb-3 d-inline-block"
+                                    style="width: fit-content;">02</div>
+                                <h6 class="fw-black mb-2">Pin Location</h6>
+                                <p class="small text-muted mb-0">Use the 'Use My Location' button to get exact
+                                    coordinates for the NGO.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 bg-light-subtle p-3 h-100 rounded-4">
+                                <div class="bg-warning-subtle text-warning rounded-pill p-2 px-3 fw-black mb-3 d-inline-block"
+                                    style="width: fit-content;">03</div>
+                                <h6 class="fw-black mb-2">Click Photos</h6>
+                                <p class="small text-muted mb-0">Clear photos of the injury and area help responders
+                                    prepare.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card border-0 bg-light-subtle p-3 h-100 rounded-4">
+                                <div class="bg-warning-subtle text-warning rounded-pill p-2 px-3 fw-black mb-3 d-inline-block"
+                                    style="width: fit-content;">04</div>
+                                <h6 class="fw-black mb-2">Wait/Update</h6>
+                                <p class="small text-muted mb-0">Keep an eye on the Status tab for NGO updates and
+                                    arrival time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-rescue p-4 p-lg-5 shadow-sm bg-white border-0">
+                    <div class="alert alert-danger border-0 rounded-4 mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i><strong>AI-generated or fake images are NOT
+                            acceptable.</strong> Upload REAL photos.
+                    </div>
+                    <form id="rescueForm">
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold small text-muted">Animal Type</label>
+                                <input type="text" class="form-control rounded-3" id="animalType" required
+                                    placeholder="e.g. Dog, Cat, Bird">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold small text-muted">Animal Count</label>
+                                <input type="number" class="form-control rounded-3" id="animalCount" required min="1"
+                                    value="1">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Animal Condition</label>
+                                <select class="form-select rounded-3" id="animalCondition" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="CRITICAL">CRITICAL (Life Threatening)</option>
+                                    <option value="INJURED">INJURED (Needs Treatment)</option>
+                                    <option value="SICK">SICK (Illness visible)</option>
+                                    <option value="HEALTHY">HEALTHY (Stranded/Stray)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Emergency Level</label>
+                                <select class="form-select rounded-3" id="emergencyLevel" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option value="IMMEDIATE">IMMEDIATE (Active danger)</option>
+                                    <option value="URGENT">URGENT (Within few hours)</option>
+                                    <option value="NORMAL">NORMAL (Stable)</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted">Location Address</label>
+                                <textarea class="form-control rounded-3" id="locationAddress" required rows="2"
+                                    placeholder="Full address of the rescue location"></textarea>
+                                <button type="button" class="btn btn-sm btn-outline-warning mt-2 rounded-pill px-3"
+                                    onclick="getCurrentLocation()">Use My Current Location</button>
+                                <input type="hidden" id="latitude"><input type="hidden" id="longitude">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted">Description</label>
+                                <textarea class="form-control rounded-3" id="description" required rows="4"
+                                    placeholder="Describe the animal's situation and specific needs"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold small text-muted d-block">Upload Photos
+                                    (REQUIRED)</label>
+                                <input type="file" class="form-control rounded-3" id="imageInput" multiple
+                                    accept="image/jpeg,image/png" required onchange="previewImages(event)">
+                                <div id="imagePreview" class="d-flex flex-wrap gap-2 mt-3"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Reporter Name</label>
+                                <input type="text" class="form-control bg-light" id="reporterName" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold small text-muted">Reporter Phone</label>
+                                <input type="text" class="form-control" id="reporterPhone">
+                            </div>
+                            <div class="col-12 pt-4">
+                                <button type="submit"
+                                    class="btn btn-brand w-100 py-3 fw-bold rounded-pill shadow-sm">SUBMIT RESCUE
+                                    REPORT</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- TAB 2: STATUS -->
+            <div class="tab-pane fade" id="tab-status">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-black mb-0">Status of Rescue Report</h4>
+                    <button class="btn btn-sm btn-light rounded-pill px-3"
+                        onclick="loadStatusRescues()">Refresh</button>
+                </div>
+                <div id="statusContainer" class="d-grid gap-4">
+                    <!-- Cards with progress bar injected here -->
+                </div>
+            </div>
+
+            <!-- TAB 3: HISTORY -->
+            <div class="tab-pane fade" id="tab-history">
+                <h4 class="fw-black mb-4">Rescue History</h4>
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light text-muted small fw-bold">
+                                <tr>
+                                    <th class="ps-4">ID</th>
+                                    <th>ANIMAL</th>
+                                    <th>LOCATION</th>
+                                    <th>DATE</th>
+                                    <th>STATUS</th>
+                                    <th class="pe-4">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody" class="small">
+                                <!-- Table rows injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <nav class="mt-4" id="historyPagination"></nav>
+            </div>
+        </div>
+    </main>
+
+    <!-- DETAILS MODAL -->
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 p-4">
+                    <h5 class="modal-title fw-black" id="modalTitle">Rescue Report Details</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-0" id="modalContent"></div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/rescue-center.js"></script>
+</body>
+
+</html>

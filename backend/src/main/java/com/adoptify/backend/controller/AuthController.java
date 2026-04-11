@@ -156,4 +156,12 @@ public class AuthController {
             return ResponseEntity.ok(java.util.Map.of("valid", false, "message", e.getMessage()));
         }
     }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(org.springframework.security.core.Authentication authentication) {
+        if (authentication == null) return ResponseEntity.status(401).build();
+        return userRepository.findByEmail(authentication.getName())
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

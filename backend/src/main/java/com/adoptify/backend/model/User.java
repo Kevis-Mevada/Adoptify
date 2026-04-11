@@ -21,6 +21,7 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private String password;
 
     private String fullName;
@@ -45,6 +46,8 @@ public class User {
     @Builder.Default
     @Column(columnDefinition = "boolean default false")
     private Boolean rescueEnabled = false; // Restricted to verified NGOs only
+
+    private String verificationRemarks;
 
     private String profileImage;
 

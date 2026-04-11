@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Adoptify</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: radial-gradient(circle at top right, #f8fafc, #eff6ff); color: #1e293b; min-height: 100vh; }
+        .admin-nav { background: #0f172a; min-height: 100vh; color: white; transition: all 0.3s; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 10px 0 30px rgba(0,0,0,0.1); z-index: 1000; }
+        .admin-nav .nav-link { color: white; padding: 0.9rem 1.5rem; font-weight: 600; border-radius: 12px; margin: 0.4rem 1.2rem; transition: all 0.3s ease; border: 1px solid transparent; }
+        .admin-nav .nav-link:hover { background: rgba(255,255,255,0.05); color: #f1f5f9; border-color: rgba(255,255,255,0.1); }
+        .admin-nav .nav-link.active { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-color: rgba(245, 158, 11, 0.2); }
+        .admin-nav .nav-link i { width: 20px; margin-right: 12px; font-size: 1.1rem; }
+        .stat-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border-radius: 20px; padding: 1.8rem; border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.04), 0 4px 6px -2px rgba(0,0,0,0.02); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: default; }
+        .stat-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); border-color: #f59e0b; }
+        .stat-card h3 { font-size: 2.2rem; font-weight: 800; margin: 0; color: #0f172a; letter-spacing: -0.02em; }
+        .stat-card p { color: #64748b; font-size: 0.75rem; font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+        .stat-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; transition: transform 0.3s; }
+        .stat-card:hover .stat-icon { transform: scale(1.1) rotate(5deg); }
+        
+        .stat-users { background: #eff6ff; color: #2563eb; }
+        .stat-ngos { background: #faf5ff; color: #7c3aed; }
+        .stat-rescue { background: #fef2f2; color: #dc2626; }
+        .stat-adopt { background: #f0fdf4; color: #16a34a; }
+        
+        .table-card { background: white; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow: hidden; }
+        .data-table thead { background: #f8fafc; border-bottom: 1px solid #e2e8f0; }
+        .data-table th { font-weight: 700; color: #475569; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 1.2rem 1.5rem; }
+        .data-table td { vertical-align: middle; padding: 1.2rem 1.5rem; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; color: #334155; }
+        .data-table tr:hover { background-color: #f8fafc; }
+        
+        .badge { font-weight: 800; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.7rem; text-transform: uppercase; border: 1px solid transparent; }
+        .badge.bg-success { background-color: #dcfce7 !important; color: #166534 !important; }
+        .badge.bg-warning { background-color: #fef9c3 !important; color: #854d0e !important; }
+        .badge.bg-danger { background-color: #fee2e2 !important; color: #991b1b !important; }
+        .badge.bg-info { background-color: #e0f2fe !important; color: #075985 !important; }
+        .btn-action { padding: 0.5rem 1rem; border-radius: 10px; font-weight: 800; font-size: 0.75rem; border: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .btn-action:hover { transform: scale(1.05); filter: brightness(0.9); }
+        
+        .tab-content { padding-top: 2rem; animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .search-container { position: relative; }
+        .search-container i { position: absolute; left: 1.2rem; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+        .search-container input { padding: 0.8rem 1.2rem 0.8rem 3rem; border-radius: 14px; border: 1.5px solid #e2e8f0; background: white; transition: all 0.3s; }
+        .search-container input:focus { border-color: #f59e0b; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1); outline: none; }
+        
+        .btn-primary { background: #1a202c; border: none; font-weight: 700; padding: 0.8rem 1.5rem; transition: all 0.3s; }
+        .btn-primary:hover { background: #000; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+
+        .fw-black { font-weight: 900; letter-spacing: -0.03em; color: #0f172a; }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            <!-- Sidebar -->
+            <div class="col-lg-2 admin-nav d-none d-lg-block sticky-top">
+                <div class="p-4 mb-4">
+                    <img src="../asset/Images/logo.png" style="height: 40px; filter: brightness(0) invert(1);" alt="Adoptify Logo">
+                    <div class="small fw-bold text-warning mt-2">ADMIN PORTAL</div>
+                </div>
+                <div class="nav flex-column nav-pills" id="adminTabs" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active text-start" id="nav-dashboard" data-bs-toggle="pill" data-bs-target="#tab-dashboard" role="tab"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+                    <button class="nav-link text-start" id="nav-users" data-bs-toggle="pill" data-bs-target="#tab-users" role="tab"><i class="fa-solid fa-users"></i> Users</button>
+                    <button class="nav-link text-start" id="nav-ngo" data-bs-toggle="pill" data-bs-target="#tab-ngo" role="tab"><i class="fa-solid fa-building-circle-check"></i> NGO Verification</button>
+                    <button class="nav-link text-start" id="nav-rescue" data-bs-toggle="pill" data-bs-target="#tab-rescue" role="tab"><i class="fa-solid fa-truck-medical"></i> Rescue Reports</button>
+                    <button class="nav-link text-start" id="nav-adoption" data-bs-toggle="pill" data-bs-target="#tab-adoption" role="tab"><i class="fa-solid fa-heart"></i> Adoption Reports</button>
+                    <button class="nav-link text-start" id="nav-rate" data-bs-toggle="pill" data-bs-target="#tab-rate" role="tab"><i class="fa-solid fa-star"></i> Rate NGOs</button>
+                </div>
+                <div class="mt-auto p-4 border-top border-white border-opacity-10">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="bg-warning rounded-pill d-flex align-items-center justify-content-center" style="width:40px; height:40px; box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);"><i class="fa-solid fa-user-shield text-dark"></i></div>
+                        <div class="lh-1">
+                            <div id="admin-name" class="small fw-bold text-white">Admin</div>
+                            <div class="x-small text-white-50 mt-1">Super Admin</div>
+                        </div>
+                    </div>
+                    <button onclick="logout()" class="btn btn-outline-danger btn-sm w-100 rounded-pill py-2 fw-bold" style="border-width: 2px;"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 p-4 p-lg-5">
+                <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h1 class="fw-black m-0">Admin Dashboard</h1>
+                    <div class="d-flex gap-3">
+                        <button onclick="refreshData()" class="btn btn-white shadow-sm rounded-pill px-3 fw-bold border-0 d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-arrows-rotate text-warning" id="refresh-icon"></i> Refresh Data
+                        </button>
+                        <span id="current-date" class="badge bg-white text-dark shadow-sm py-2 px-3 fw-bold border-0"></span>
+                    </div>
+                </div>
+
+                <!-- Stats View -->
+                <div class="row g-4 mb-5">
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Total Users</p>
+                                <div class="stat-icon stat-users"><i class="fa-solid fa-user"></i></div>
+                            </div>
+                            <h3 id="stat-totalUsers">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Total NGOs</p>
+                                <div class="stat-icon stat-ngos"><i class="fa-solid fa-building"></i></div>
+                            </div>
+                            <h3 id="stat-totalNGOs">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Pending NGOs</p>
+                                <div class="stat-icon bg-warning-subtle text-warning"><i class="fa-solid fa-clock"></i></div>
+                            </div>
+                            <h3 id="stat-pendingNGOs">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Total Animals</p>
+                                <div class="stat-icon bg-info-subtle text-info"><i class="fa-solid fa-dog"></i></div>
+                            </div>
+                            <h3 id="stat-totalAnimals">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Rescues</p>
+                                <div class="stat-icon stat-rescue"><i class="fa-solid fa-ambulance"></i></div>
+                            </div>
+                            <h3 id="stat-totalRescues">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-2">
+                        <div class="stat-card">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p>Adoptions</p>
+                                <div class="stat-icon stat-adopt"><i class="fa-solid fa-check-circle"></i></div>
+                            </div>
+                            <h3 id="stat-totalAdoptions">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs Content -->
+                <div class="tab-content">
+                    <!-- Dashboard Tab -->
+                    <div class="tab-pane fade show active" id="tab-dashboard">
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="table-card p-4 h-100 border-0 shadow-lg" style="background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);">
+                                    <h5 class="fw-bold mb-4 d-flex align-items-center"><i class="fa-solid fa-chart-line me-2 text-warning"></i> Platform Overview</h5>
+                                    <div class="bg-white rounded-5 p-5 text-center shadow-sm border border-light-subtle h-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 300px;">
+                                        <div class="bg-warning-subtle p-4 rounded-circle mb-4">
+                                            <i class="fa-solid fa-chart-area fs-1 text-warning"></i>
+                                        </div>
+                                        <h4 class="fw-bold text-dark mb-2">Platform Activity Analytics</h4>
+                                        <p class="text-muted small px-5">Real-time charts and visualized data metrics will be available in the upcoming platform expansion.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="table-card p-4 h-100 border-0 shadow-lg">
+                                    <h5 class="fw-bold mb-4 d-flex align-items-center"><i class="fa-solid fa-bolt me-2 text-primary"></i> Recent Activity</h5>
+                                    <div id="activity-log" class="vstack gap-3">
+                                        <div class="p-3 bg-light rounded-4 d-flex align-items-center gap-3 border border-white">
+                                            <div class="bg-primary-subtle text-primary p-2 rounded-3"><i class="fa-solid fa-shield-check"></i></div>
+                                            <div class="lh-1"><div class="x-small fw-bold">Monitoring Active</div><div class="x-small text-muted mt-1">System healthy</div></div>
+                                        </div>
+                                        <div class="p-3 bg-light rounded-4 d-flex align-items-center gap-3 border border-white">
+                                            <div class="bg-success-subtle text-success p-2 rounded-3"><i class="fa-solid fa-lock"></i></div>
+                                            <div class="lh-1"><div class="x-small fw-bold">Admin Session</div><div class="x-small text-muted mt-1">Authenticated via JWT</div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Users Tab -->
+                    <div class="tab-pane fade" id="tab-users">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="search-container flex-fill me-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="userSearch" class="form-control" placeholder="Search by name or email..." onkeyup="filterUsers()">
+                            </div>
+                            <select id="userRoleFilter" class="form-select w-auto rounded-3" onchange="filterUsers()">
+                                <option value="ALL">All Roles</option>
+                                <option value="REGULAR_USER">Regular Users</option>
+                                <option value="NGO">NGOs</option>
+                                <option value="ADMIN">Admins</option>
+                            </select>
+                        </div>
+                        <div class="table-card">
+                            <table class="table data-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Verified</th>
+                                        <th>Joined</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- NGO Verification Tab -->
+                    <div class="tab-pane fade" id="tab-ngo">
+                        <h5 class="fw-bold mb-4">Pending NGO Requests</h5>
+                        <div id="ngoPendingList" class="row g-4"></div>
+                    </div>
+
+                    <!-- Rescue Tab -->
+                    <div class="tab-pane fade" id="tab-rescue">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="search-container flex-fill me-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="rescueSearch" class="form-control" placeholder="Search reporter or animal..." onkeyup="filterRescues()">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <select id="rescueStatusFilter" class="form-select w-auto rounded-3" onchange="filterRescues()">
+                                    <option value="ALL">All Status</option>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="COMPLETED">Completed</option>
+                                </select>
+                                <button onclick="exportRescues()" class="btn btn-primary rounded-3 px-3"><i class="fa-solid fa-file-export me-1"></i> EXPORT CSV</button>
+                            </div>
+                        </div>
+                        <div class="table-card">
+                            <table class="table data-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Reporter</th>
+                                        <th>Animal</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rescueTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Adoption Tab -->
+                    <div class="tab-pane fade" id="tab-adoption">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="search-container flex-fill me-3">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="adoptionSearch" class="form-control" placeholder="Search animals or names..." onkeyup="filterAdoptions()">
+                            </div>
+                            <div class="d-flex gap-2">
+                                <select id="adoptionStatusFilter" class="form-select w-auto rounded-3" onchange="filterAdoptions()">
+                                    <option value="ALL">All Status</option>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="APPROVED">Approved</option>
+                                    <option value="COMPLETED">Completed</option>
+                                </select>
+                                <button onclick="exportAdoptions()" class="btn btn-primary rounded-3 px-3"><i class="fa-solid fa-file-export me-1"></i> EXPORT CSV</button>
+                            </div>
+                        </div>
+                        <div class="table-card">
+                            <table class="table data-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Animal</th>
+                                        <th>Adopter</th>
+                                        <th>Owner</th>
+                                        <th>Status</th>
+                                        <th>Request Date</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adoptionTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Rate NGOs Tab -->
+                    <div class="tab-pane fade" id="tab-rate">
+                        <h5 class="fw-bold mb-4">Rate Rescue Missions</h5>
+                        <div class="table-card">
+                            <table class="table data-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Rescue ID</th>
+                                        <th>NGO Name</th>
+                                        <th>Animal</th>
+                                        <th>Rescue Date</th>
+                                        <th>Rating</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rateTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Verification Modals, Detail Modals etc. will be handled via JS and Template literals for brevity -->
+    <div class="modal fade" id="adminModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 px-4 pt-4 pb-0">
+                    <h5 class="modal-title fw-bold" id="adminModalTitle">Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" id="adminModalBody"></div>
+                <div class="modal-footer border-0 p-4" id="adminModalFooter"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/admin-dashboard.js"></script>
+</body>
+</html>

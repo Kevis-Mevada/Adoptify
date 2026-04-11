@@ -18,4 +18,6 @@ public interface RescueResponseRepository extends JpaRepository<RescueResponse, 
     Optional<RescueResponse> findByRescueReportIdAndResponderId(Long rescueReportId, Long responderId);
 
     List<RescueResponse> findByRescueReportIdAndResponseStatus(Long rescueReportId, ResponseStatus status);
+    
+    List<RescueResponse> findByResponderIdAndResponseStatus(Long responderId, ResponseStatus status);
 }

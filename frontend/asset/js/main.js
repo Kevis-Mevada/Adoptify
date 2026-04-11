@@ -32,7 +32,25 @@ function initNavigation() {
             if (userSection) userSection.classList.remove('d-none');
             if (userSection) userSection.classList.add('d-flex');
             
-            if (userNameSpan) userNameSpan.textContent = user.fullName || 'User';
+            if (userNameSpan) {
+                userNameSpan.textContent = user.organizationName || user.fullName || 'User';
+            }
+
+            // Dynamically add NGO Dashboard link if user is NGO
+            if (user.role === 'NGO') {
+                const actionDrop = document.getElementById('animalActionDrop') || document.querySelector('.dropdown-toggle');
+                if (actionDrop) {
+                    const dropdownMenu = actionDrop.nextElementSibling;
+                    if (dropdownMenu && !dropdownMenu.querySelector('[href*="ngo-dashboard.html"]')) {
+                        const li = document.createElement('li');
+                        // Determine relative path based on current location
+                        const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+                        const path = isRoot ? 'ngo/ngo-dashboard.html' : '../ngo/ngo-dashboard.html';
+                        li.innerHTML = `<a class="dropdown-item" href="${path}">NGO Dashboard</a>`;
+                        dropdownMenu.appendChild(li);
+                    }
+                }
+            }
         } catch (e) {
             console.error("Error parsing user data:", e);
             clearAuth();

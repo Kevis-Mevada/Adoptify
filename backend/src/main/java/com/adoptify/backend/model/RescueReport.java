@@ -21,6 +21,7 @@ public class RescueReport {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reporter_id")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private User reporter;
 
     private String reporterName;
@@ -34,14 +35,17 @@ public class RescueReport {
     @Enumerated(EnumType.STRING)
     private EmergencyLevel emergencyLevel;
 
+    @Column(length = 500)
     private String locationAddress;
     private Double latitude;
     private Double longitude;
+    @Column(length = 255)
     private String landmark;
 
-    @Column(length = 1000)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(length = 1000)
     private String images; // comma separated URLs
 
     @Enumerated(EnumType.STRING)
@@ -49,11 +53,18 @@ public class RescueReport {
     @Builder.Default
     private RescueStatus status = RescueStatus.PENDING;
 
+    @Builder.Default
+    private Boolean isImageVerified = false;
+    private Double imageVerificationScore;
+    @Column(length = 1000)
+    private String imageVerificationMessage;
+
     private String adminRemarks;
 
     @Min(1)
     @Max(5)
     private Integer rating;
+    private String ratingRemarks;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

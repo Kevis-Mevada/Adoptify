@@ -105,7 +105,7 @@ public class DataInitializer {
                 .build());
 
         // ===== NGO =====
-        User ngo = userRepository.save(User.builder()
+        userRepository.save(User.builder()
                 .email("ngo@animalrescue.org")
                 .password(passwordEncoder.encode("ngo12345"))
                 .fullName("Animal Rescue Foundation")
@@ -125,7 +125,7 @@ public class DataInitializer {
                 .build());
 
         // ===== RESCUER =====
-        User rescuer = userRepository.save(User.builder()
+        userRepository.save(User.builder()
                 .email("rescuer@adoptify.com")
                 .password(passwordEncoder.encode("rescue123"))
                 .fullName("Vikram Singh")
@@ -142,7 +142,7 @@ public class DataInitializer {
                 .build());
 
         // ===== VETERINARIAN =====
-        User vet = userRepository.save(User.builder()
+        userRepository.save(User.builder()
                 .email("vet@petcare.com")
                 .password(passwordEncoder.encode("vet12345"))
                 .fullName("Dr. Sneha Reddy")

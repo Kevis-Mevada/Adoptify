@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByRoleAndIsVerifiedTrue(UserRole role);
 
     List<User> findByLatitudeBetweenAndLongitudeBetween(Double minLat, Double maxLat, Double minLng, Double maxLng);
+
+    long countByRole(UserRole role);
+    long countByRoleAndIsVerified(UserRole role, boolean isVerified);
 }

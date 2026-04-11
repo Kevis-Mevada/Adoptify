@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard | Adoptify</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
+        .stats-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .stats-card h3 { font-weight: 800; margin-bottom: 0.25rem; }
+        .stats-card p { font-size: 0.85rem; color: #6c757d; margin: 0; font-weight: 600; }
+        .nav-tabs { border: none; gap: 1rem; margin-bottom: 2rem; }
+        .nav-tabs .nav-link { border: 1px solid #dee2e6; border-radius: 10px; color: #6c757d; font-weight: 600; background: #fff; padding: 0.75rem 1.5rem; }
+        .nav-tabs .nav-link.active { background: #ffc107; color: #000; border-color: #ffc107; }
+        .rescue-card { background: #fff; border: 1px solid #dee2e6; border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem; position: relative; }
+        .emergency-badge { position: absolute; top: 1.5rem; right: 1.5rem; padding: 0.25rem 0.75rem; border-radius: 50rem; font-size: 0.7rem; font-weight: 800; }
+        .badge-immediate { background-color: #dc3545; color: #fff; }
+        .badge-urgent { background-color: #fd7e14; color: #fff; }
+        .badge-normal { background-color: #198754; color: #fff; }
+        .status-badge { padding: 0.25rem 1rem; border-radius: 50rem; font-size: 0.75rem; font-weight: 700; }
+        .btn-status { font-size: 0.75rem; font-weight: 700; border-radius: 50rem; padding: 0.4rem 1rem; }
+        .verification-warning { background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; }
+        .verification-badge { color: #198754; font-size: 0.9rem; font-weight: 700; }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo" style="height: 40px;">
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../animals/browse.html">Adopt Animal</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
+                            <li><a class="dropdown-item" href="../animals/add-animal.html">Add Animal</a></li>
+                            <li><a class="dropdown-item active" href="rescue.html">Rescue Animal</a></li>
+                            <li><a class="dropdown-item" href="../animals/listed-animals.html">Listed Animals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Adoption Request
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
+                            <li><a class="dropdown-item" href="../animals/sent-requests.html">Send Request</a></li>
+                            <li><a class="dropdown-item" href="../animals/received-requests.html">Received Request</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3 ms-lg-auto">
+                    <div id="auth-section" class="d-flex align-items-center gap-2">
+                        <div class="user-placeholder-circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="../auth/login.html" class="nav-link fw-bold p-0">Login/Register</a>
+                    </div>
+
+                    <div id="user-section" class="d-none align-items-center gap-3">
+                        <div class="text-end lh-1">
+                            <div id="user-name" class="fw-bold small text-dark">User Name</div>
+                        </div>
+                        <div class="user-placeholder-circle bg-warning border-0 text-dark">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <a href="#" id="logout-btn" class="text-muted"><i
+                                class="fa-solid fa-right-from-bracket fs-5"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="container py-4">
+        <h2 class="fw-bold mb-4">NGO Dashboard</h2>
+
+        <div id="verification-msg" class="verification-warning d-none">
+            <i class="fa-solid fa-triangle-exclamation me-2"></i> Your NGO account is pending verification. You cannot accept rescues until verified.
+        </div>
+
+        <!-- Stats row -->
+        <div class="row g-3 mb-5">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="stat-total-accepted">0</h3>
+                    <p>Total Rescues Accepted</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="stat-completed">0</h3>
+                    <p>Rescues Completed</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="stat-pending">0</h3>
+                    <p>Pending Alerts</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <h3 id="stat-rating">0.0 ★</h3>
+                    <p>Average Rating</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="ngoTabs" role="tablist">
+            <li class="nav-item"><button class="nav-link active" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#tab-alerts">Rescue Alerts</button></li>
+            <li class="nav-item"><button class="nav-link" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#tab-accepted">Accepted Rescues</button></li>
+            <li class="nav-item"><button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#tab-history">History</button></li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- TAB 1: ALERTS -->
+            <div class="tab-pane fade show active" id="tab-alerts">
+                <div id="alertsContainer"></div>
+            </div>
+
+            <!-- TAB 2: ACCEPTED -->
+            <div class="tab-pane fade" id="tab-accepted">
+                <div id="acceptedContainer"></div>
+            </div>
+
+            <!-- TAB 3: HISTORY -->
+            <div class="tab-pane fade" id="tab-history">
+                <div class="bg-white border rounded-3 overflow-hidden shadow-sm">
+                    <table class="table table-hover mb-0">
+                        <thead class="bg-light text-muted small fw-bold">
+                            <tr>
+                                <th class="ps-3">ID</th>
+                                <th>ANIMAL</th>
+                                <th>LOCATION</th>
+                                <th>COMPLETED ON</th>
+                                <th>RATING</th>
+                                <th class="pe-3 text-center">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody" class="small"></tbody>
+                    </table>
+                </div>
+                <div id="historyPagination" class="d-flex justify-content-between align-items-center mt-3 small text-muted"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Accept Modal -->
+    <div class="modal fade" id="acceptModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 px-4 pt-4 pb-0">
+                    <h5 class="modal-title fw-bold">Accept Rescue Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="acceptSummary" class="bg-light p-3 rounded-3 mb-4 small fw-bold"></div>
+                    <label class="form-label small fw-bold">Estimated Arrival Time</label>
+                    <input type="datetime-local" id="etaInput" class="form-control" required>
+                </div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-warning w-100 py-2 fw-bold" onclick="confirmAccept()">Confirm Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reject Modal -->
+    <div class="modal fade" id="rejectModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 px-4 pt-4 pb-0">
+                    <h5 class="modal-title fw-bold">Reject Rescue Request</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <label class="form-label small fw-bold text-danger">Reason for rejection</label>
+                    <textarea id="rejectReason" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-brand w-100 py-2 fw-bold" onclick="confirmReject()">Confirm Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 px-4 pt-4 pb-0">
+                    <h5 class="modal-title fw-bold">Rescue Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4" id="detailsContent"></div>
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/main.js"></script>
+    <script src="../asset/js/ngo-dashboard.js"></script>
+</body>
+
+</html>

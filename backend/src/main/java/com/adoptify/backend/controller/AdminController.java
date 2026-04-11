@@ -1,87 +1,95 @@
 package com.adoptify.backend.controller;
 
+import com.adoptify.backend.dto.response.AdminStatsResponse;
+import com.adoptify.backend.dto.response.MessageResponse;
+import com.adoptify.backend.model.AdoptionRequest;
+import com.adoptify.backend.model.RescueReport;
 import com.adoptify.backend.model.User;
-import com.adoptify.backend.dto.request.RejectRequest; // Added import
-import com.adoptify.backend.repository.AnimalRepository;
-import com.adoptify.backend.repository.RescueReportRepository;
-import com.adoptify.backend.repository.UserRepository;
+import com.adoptify.backend.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AnimalRepository animalRepository;
-
-    @Autowired
-    private RescueReportRepository rescueReportRepository;
+    private AdminService adminService;
 
     @GetMapping("/stats")
-    public ResponseEntity<Map<String, Long>> getStats() {
-        Map<String, Long> stats = new HashMap<>();
-        stats.put("totalUsers", userRepository.count());
-        stats.put("totalAnimals", animalRepository.count());
-        stats.put("totalRescues", rescueReportRepository.count());
-        stats.put("pendingNGOs", (long) userRepository.findByIsVerifiedFalse().size());
-        return ResponseEntity.ok(stats);
+    public ResponseEntity<AdminStatsResponse> getStats() {
+        return ResponseEntity.ok(adminService.getStats());
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userRepository.findAll());
-    }
-
-    @PutMapping("/users/{id}/verify")
-    public ResponseEntity<?> verifyUser(@PathVariable("id") Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setIsVerified(true);
-        return ResponseEntity.ok(userRepository.save(user));
-    }
-
-    @PutMapping("/users/{id}/reject")
-    public ResponseEntity<?> rejectUser(@PathVariable("id") Long id, @RequestBody RejectRequest request) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setIsVerified(false);
-        user.setIsActive(false); // Can also mark rejected, but this is simple MVP approach
-        return ResponseEntity.ok(userRepository.save(user));
-    }
-
-    @PutMapping("/users/{id}/toggle-status")
-    public ResponseEntity<?> toggleUserStatus(@PathVariable("id") Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setIsActive(user.getIsActive() != null ? !user.getIsActive() : false);
-        return ResponseEntity.ok(userRepository.save(user));
-    }
-
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User request) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        if (request.getFullName() != null) user.setFullName(request.getFullName());
-        if (request.getPhone() != null) user.setPhone(request.getPhone());
-        if (request.getCity() != null) user.setCity(request.getCity());
-        if (request.getRole() != null) user.setRole(request.getRole());
-        return ResponseEntity.ok(userRepository.save(user));
+        return ResponseEntity.ok(adminService.getAllUsers());
     }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         try {
-            userRepository.deleteById(id);
-            return ResponseEntity.ok().build();
+            adminService.deleteUser(id);
+            return ResponseEntity.ok(new MessageResponse("User deleted successfully"));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("message", "Cannot delete user. They have active animals or reports tied to their account. Please suspend them instead."));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/users/{id}/verify")
+    public ResponseEntity<?> verifyNGO(@PathVariable("id") Long id, @RequestBody(required = false) Map<String, String> body) {
+        try {
+            String notes = body != null ? body.get("notes") : "";
+            adminService.verifyNGO(id, notes);
+            return ResponseEntity.ok(new MessageResponse("NGO verified successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: " + e.getMessage()));
+        }
+    }
+
+    @PutMapping("/users/{id}/reject")
+    public ResponseEntity<?> rejectNGO(@PathVariable("id") Long id, @RequestBody Map<String, String> body) {
+        try {
+            String reason = body != null ? body.get("reason") : "No reason provided";
+            adminService.rejectNGO(id, reason);
+            return ResponseEntity.ok(new MessageResponse("NGO rejected successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: " + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/rescue-reports")
+    public ResponseEntity<List<RescueReport>> getAllRescueReports() {
+        return ResponseEntity.ok(adminService.getAllRescueReports());
+    }
+
+    @GetMapping("/adoption-requests")
+    public ResponseEntity<List<AdoptionRequest>> getAllAdoptionRequests() {
+        return ResponseEntity.ok(adminService.getAllAdoptionRequests());
+    }
+
+    @PostMapping("/rescue/{id}/rate")
+    public ResponseEntity<?> rateRescueNGO(@PathVariable("id") Long id, @RequestBody Map<String, Object> body) {
+        try {
+            Object ratingObj = body.get("rating");
+            Integer rating = null;
+            if (ratingObj instanceof Integer) {
+                rating = (Integer) ratingObj;
+            } else if (ratingObj instanceof String) {
+                rating = Integer.parseInt((String) ratingObj);
+            }
+            String remarks = (String) body.get("remarks");
+            adminService.rateRescueNGO(id, rating, remarks);
+            return ResponseEntity.ok(new MessageResponse("NGO rated successfully"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: " + e.getMessage()));
         }
     }
 }
