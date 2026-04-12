@@ -212,12 +212,12 @@ async function loadHistory() {
             if (!r) return '';
             return `
             <tr>
-                <td class="ps-3 fw-bold">#${r.id}</td>
-                <td><div class="fw-bold">${r.animalType}</div><div class="x-small text-muted">${r.animalCondition}</div></td>
-                <td class="text-truncate" style="max-width: 200px;">${r.locationAddress}</td>
-                <td>${new Date(res.updatedAt).toLocaleDateString()}</td>
-                <td><span class="text-warning">${r.rating ? '★'.repeat(r.rating) : 'Unrated'}</span></td>
-                <td class="pe-3 text-center">
+                <td data-label="Mission ID" class="ps-3 fw-bold">#${r.id}</td>
+                <td data-label="Animal"><div class="fw-bold">${r.animalType}</div><div class="x-small text-muted">${r.animalCondition}</div></td>
+                <td data-label="Location" class="text-truncate" style="max-width: 200px;">${r.locationAddress}</td>
+                <td data-label="Date">${new Date(res.updatedAt).toLocaleDateString()}</td>
+                <td data-label="Rating"><span class="text-warning">${r.rating ? '★'.repeat(r.rating) : 'Unrated'}</span></td>
+                <td data-label="Actions" class="pe-3 text-center">
                     <button class="btn btn-light btn-sm rounded-pill px-3 py-1 fw-bold fs-x-small" onclick="viewDetails(${r.id})">VIEW</button>
                 </td>
             </tr>

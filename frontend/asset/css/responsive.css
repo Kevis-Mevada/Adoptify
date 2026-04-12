@@ -1,0 +1,155 @@
+/* Adoptify Global Responsiveness Fixes */
+
+/* Typography Scaling */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.2rem !important;
+    }
+    .display-4 {
+        font-size: 2.5rem !important;
+    }
+    .hero-section {
+        padding: 60px 0 !important;
+    }
+    .hero-rescue p {
+        font-size: 1rem !important;
+    }
+}
+
+/* Navbar Fixes */
+@media (max-width: 991px) {
+    .navbar-brand img {
+        height: 45px !important;
+    }
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        margin-top: 10px;
+    }
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        text-align: center;
+    }
+    #user-section, #auth-section {
+        justify-content: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+}
+
+/* Card Grids */
+@media (max-width: 576px) {
+    .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+    .card-rescue, .stats-card, .rescue-card {
+        padding: 1.25rem !important;
+    }
+    .d-md-flex {
+        flex-direction: column !important;
+    }
+}
+
+/* Table Responsiveness */
+.table-responsive {
+    border: none !important;
+}
+
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid #eee;
+        border-radius: 1rem;
+        padding: 1rem;
+        background: white;
+    }
+    .table tbody td {
+        display: block;
+        text-align: right;
+        padding-left: 50% !important;
+        position: relative;
+        border: none !important;
+    }
+    .table tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        text-align: left;
+        font-weight: 700;
+        color: #6c757d;
+    }
+}
+
+/* Modals */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    .modal-body {
+        padding: 1.25rem !important;
+    }
+}
+
+/* Hero Images */
+@media (max-width: 991px) {
+    .hero-img {
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+/* Animal Browsing Grid */
+#animal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    #animal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Custom Spacing */
+.mt-mobile-4 {
+    margin-top: 1.5rem !important;
+}
+@media (min-width: 992px) {
+    .mt-mobile-4 {
+        margin-top: 0 !important;
+    }
+}
+
+/* Floating Action Button for Mobile Rescue */
+.mobile-fab {
+    display: none;
+}
+@media (max-width: 768px) {
+    .mobile-fab {
+        display: flex;
+        position: fixed;
+        bottom: 2rem;
+        right: 1.5rem;
+        background: var(--brand-500);
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+        z-index: 1000;
+        text-decoration: none;
+    }
+}
