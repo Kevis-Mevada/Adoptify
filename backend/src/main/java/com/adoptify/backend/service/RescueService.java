@@ -215,6 +215,13 @@ public class RescueService {
                         res.setResponseStatus(ResponseStatus.COMPLETED);
                         res.setUpdatedAt(LocalDateTime.now());
                         rescueResponseRepository.save(res);
+
+                        // Notify Reporter
+                        try {
+                            emailService.sendRescueCompletedEmailToReporter(report, res.getResponder());
+                        } catch (Exception e) {
+                            logger.error("Failed to send rescue completion email: {}", e.getMessage());
+                        }
                     });
         } else if (status == RescueStatus.RESCUED) {
             report.setResolvedAt(LocalDateTime.now());

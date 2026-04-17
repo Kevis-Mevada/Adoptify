@@ -252,4 +252,25 @@ public class EmailService {
         
         sendHtmlMessage(to, subject, html);
     }
+    public void sendRescueCompletedEmailToReporter(com.adoptify.backend.model.RescueReport report, User ngo) {
+        if (report.getReporter() == null) return;
+
+        String to = report.getReporter().getEmail();
+        String subject = "✨ Mission Accomplished: " + report.getAnimalType() + " Rescued!";
+
+        String html = "<div style='font-family: \"Inter\", sans-serif; max-width: 600px; margin: 20px auto; border: 1px solid #10b981; padding: 40px; border-radius: 20px; background-color: #ffffff; text-align: center;'>"
+                + "<div style='margin-bottom: 30px;'><h1 style='color: #10b981; margin: 0; font-size: 28px;'>✨ Success!</h1></div>"
+                + "<p style='font-size: 16px; text-align: left;'>Hello <strong>" + report.getReporterName() + "</strong>,</p>"
+                + "<p style='font-size: 16px; text-align: left;'>We are happy to share that the rescue mission for the " + report.getAnimalType() + " has been **Completed** by <strong>" + ngo.getOrganizationName() + "</strong>.</p>"
+                + "<div style='background-color: #f0fdf4; padding: 25px; border-radius: 16px; margin: 30px 0; border: 1px solid #bbf7d0; text-align: left;'>"
+                + "<p style='margin: 0; color: #166534; font-weight: 500;'>Thank you for your quick action and reporting this incident. Your compassion helped save a life today!</p>"
+                + "</div>"
+                + "<p style='font-size: 14px; color: #64748b;'>Would you like to rate the service provided by the NGO? Your feedback helps us maintain high standards.</p>"
+                + "<div style='margin-top: 40px;'>"
+                + "<a href='" + frontendUrl + "/index.html' style='background-color: #10b981; color: white; padding: 18px 36px; text-decoration: none; border-radius: 14px; font-weight: 900; font-size: 18px; display: inline-block; box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);'>Share Feedback</a>"
+                + "</div>"
+                + "</div>";
+
+        sendHtmlMessage(to, subject, html);
+    }
 }

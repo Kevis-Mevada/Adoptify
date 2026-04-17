@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings | Adoptify</title>
+    <!-- CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/responsive.css">
+    <style>
+        body { background-color: #f8fafc; }
+        .settings-card { background: white; border-radius: 20px; padding: 2.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .settings-nav { background: white; border-radius: 20px; padding: 1.5rem; border: 1px solid #e2e8f0; }
+        .settings-nav .nav-link { color: #64748b; font-weight: 600; padding: 0.8rem 1.2rem; border-radius: 12px; margin-bottom: 0.5rem; transition: all 0.2s; }
+        .settings-nav .nav-link:hover { background: #f1f5f9; color: #1e293b; }
+        .settings-nav .nav-link.active { background: #fff7ed; color: #f59e0b; }
+        .section-title { font-weight: 800; color: #0f172a; margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; }
+        .form-label { font-weight: 800; font-size: 0.75rem; text-transform: uppercase; color: #64748b; margin-bottom: 0.6rem; letter-spacing: 0.05em; }
+        .form-control { border-radius: 12px; border: 2px solid #f1f5f9; padding: 0.8rem 1.2rem; transition: all 0.2s; }
+        .form-control:focus { border-color: #f59e0b; box-shadow: none; background-color: white; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../animals/browse.html">Adopt</a></li>
+                </ul>
+                <div class="user-placeholder-circle bg-warning text-dark me-2"><i class="fa-solid fa-user"></i></div>
+                <span id="header-user-name" class="fw-bold small">User</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-3">
+                <div class="settings-nav shadow-sm">
+                    <div class="nav flex-column nav-pills" id="settings-tab" role="tablist">
+                        <button class="nav-link active border-0 text-start" id="profile-tab" data-bs-toggle="pill" data-bs-target="#profile-pane">
+                            <i class="fa-solid fa-user-gear me-2"></i> Profile Info
+                        </button>
+                        <button class="nav-link border-0 text-start" id="security-tab" data-bs-toggle="pill" data-bs-target="#security-pane">
+                            <i class="fa-solid fa-shield-halved me-2"></i> Security
+                        </button>
+                        <hr class="my-3 opacity-10">
+                        <button class="nav-link border-0 text-start text-danger" id="logout-settings-btn">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="tab-content" id="settings-tabContent">
+                    <!-- Profile Info Pane -->
+                    <div class="tab-pane fade show active" id="profile-pane">
+                        <div class="settings-card">
+                            <h3 class="section-title"><i class="fa-solid fa-address-card text-warning"></i> Personal Information</h3>
+                            <form id="profile-form">
+                                <div class="row g-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" name="fullName" class="form-control" required id="f-name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="tel" name="phone" class="form-control" required id="f-phone">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">City</label>
+                                        <input type="text" name="city" class="form-control" required id="f-city">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Full Address</label>
+                                        <textarea name="address" class="form-control" rows="3" required id="f-address"></textarea>
+                                    </div>
+                                    <div id="ngo-only-fields" class="col-12 d-none">
+                                        <label class="form-label">Organization Name</label>
+                                        <input type="text" name="organizationName" class="form-control" id="f-org">
+                                    </div>
+                                    <div class="col-12 pt-3">
+                                        <button type="submit" class="btn btn-brand px-5 py-3 rounded-4 shadow-sm fw-bold">SAVE CHANGES</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Security Pane -->
+                    <div class="tab-pane fade" id="security-pane">
+                        <div class="settings-card">
+                            <h3 class="section-title"><i class="fa-solid fa-lock text-warning"></i> Security Settings</h3>
+                            <form id="password-form">
+                                <div class="row g-4">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Current Password</label>
+                                        <input type="password" name="oldPassword" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">New Password</label>
+                                        <input type="password" name="newPassword" class="form-control" required minlength="6">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Confirm New Password</label>
+                                        <input type="password" id="confirmPassword" class="form-control" required>
+                                    </div>
+                                    <div class="col-12 pt-3">
+                                        <button type="submit" class="btn btn-dark px-5 py-3 rounded-4 shadow-sm fw-bold">UPDATE PASSWORD</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/settings.js"></script>
+</body>
+</html>

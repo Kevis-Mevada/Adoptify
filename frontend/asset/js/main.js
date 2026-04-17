@@ -33,7 +33,9 @@ function initNavigation() {
             if (userSection) userSection.classList.add('d-flex');
             
             if (userNameSpan) {
-                userNameSpan.textContent = user.organizationName || user.fullName || 'User';
+                const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+                const settingsPath = isRoot ? 'profile/settings.html' : '../profile/settings.html';
+                userNameSpan.innerHTML = `${user.organizationName || user.fullName || 'User'} <a href="${settingsPath}" class="ms-2 text-warning small text-decoration-none"><i class="fa-solid fa-cog"></i></a>`;
             }
 
             // Dynamically add NGO Dashboard link if user is NGO

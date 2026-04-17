@@ -164,4 +164,44 @@ public class AuthController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(org.springframework.security.core.Authentication authentication,
+                                         @Valid @RequestBody com.adoptify.backend.dto.request.ProfileUpdateRequest updateRequest) {
+        if (authentication == null) return ResponseEntity.status(401).build();
+        
+        return userRepository.findByEmail(authentication.getName())
+                .map(user -> {
+                    user.setFullName(updateRequest.getFullName());
+                    user.setPhone(updateRequest.getPhone());
+                    user.setCity(updateRequest.getCity());
+                    user.setAddress(updateRequest.getAddress());
+                    if (user.getRole() == com.adoptify.backend.model.UserRole.NGO && updateRequest.getOrganizationName() != null) {
+                        user.setOrganizationName(updateRequest.getOrganizationName());
+                    }
+                    userRepository.save(user);
+                    return ResponseEntity.ok(new MessageResponse("Profile updated successfully!"));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(org.springframework.security.core.Authentication authentication,
+                                          @RequestBody java.util.Map<String, String> passwords) {
+        if (authentication == null) return ResponseEntity.status(401).build();
+        
+        String oldPassword = passwords.get("oldPassword");
+        String newPassword = passwords.get("newPassword");
+        
+        return userRepository.findByEmail(authentication.getName())
+                .map(user -> {
+                    if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+                        return ResponseEntity.badRequest().body(new MessageResponse("Current password does not match!"));
+                    }
+                    user.setPassword(passwordEncoder.encode(newPassword));
+                    userRepository.save(user);
+                    return ResponseEntity.ok(new MessageResponse("Password changed successfully!"));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

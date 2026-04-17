@@ -133,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td data-label="Actions" class="text-end">
                     <div class="d-flex justify-content-end gap-2">
+                        <a href="edit-animal.html?id=${animal.id}" class="btn btn-sm btn-light border fw-bold rounded-pill px-3">Edit</a>
                         <a href="received-requests.html" class="btn btn-sm btn-white border fw-bold rounded-pill px-3">Requests</a>
                         <button class="btn btn-sm btn-light border text-danger fw-bold rounded-pill px-3" onclick="deleteAnimal(${animal.id})"><i class="fa-solid fa-trash-can"></i></button>
                     </div>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us & FAQ | Adoptify</title>
+    <!-- CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="asset/css/responsive.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar (Simplified) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="asset/Images/logo.png" alt="Adoptify Logo" style="height: 40px;">
+            </a>
+            <div class="d-flex gap-3">
+                <a href="index.html" class="btn btn-outline-brand fw-bold rounded-pill">Home</a>
+                <a href="animals/browse.html" class="btn btn-brand fw-bold rounded-pill text-white">Find Pets</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <!-- Hero -->
+        <div class="text-center mb-5 pb-4">
+            <h1 class="display-4 fw-black text-dark mb-3">Compassion in Action</h1>
+            <p class="fs-5 text-muted max-w-700 mx-auto">Adoptify is more than a platform—it's a mission to ensure every displaced animal finds safety and a loving home.</p>
+        </div>
+
+        <!-- Vision -->
+        <div class="row g-5 align-items-center mb-5 pb-5">
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded-5 shadow-lg" alt="Happy Dog">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="fw-black mb-4">Our Vision</h2>
+                <p class="fs-5 text-muted mb-4 text-justify">Founded in 2024, Adoptify serves as the bridge between rescue organizations, individual pet owners, and animal lovers. We leverage technology to reduce the time animals spend in shelters, provide instant rescue reporting for emergencies, and verify NGO partners to ensure the highest standards of care.</p>
+                <div class="d-flex gap-4">
+                    <div class="text-center">
+                        <div class="h2 fw-black text-warning mb-0">500+</div>
+                        <div class="small fw-bold text-muted">Successful Adoptions</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="h2 fw-black text-warning mb-0">120+</div>
+                        <div class="small fw-bold text-muted">Verified NGOs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="bg-white p-5 rounded-5 border shadow-sm">
+            <h2 class="fw-black text-center mb-5">Frequently Asked Questions</h2>
+            <div class="accordion accordion-flush" id="faqAccordion">
+                <div class="accordion-item border-0 mb-3 bg-light rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button bg-transparent fw-bold py-4 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                            How do I adopt an animal?
+                        </button>
+                    </h2>
+                    <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pb-4">
+                            Browse our "Find Pets" section, select an animal you love, and click "Adopt Me". You'll need to fill out a short application. Once the owner reviews and approves it, you can coordinate the meeting!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 bg-light rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-transparent fw-bold py-4 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                            Is there an adoption fee?
+                        </button>
+                    </h2>
+                    <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pb-4">
+                            Most adoptions on Adoptify are free, as we focus on rescues. However, some NGOs may ask for a small donation to cover medical costs. This will be clearly stated in the pet's profile.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 bg-light rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-transparent fw-bold py-4 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                            How can I list an animal?
+                        </button>
+                    </h2>
+                    <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pb-4">
+                            Log in to your account, go to "Add Animal", and provide details and photos. Your listing will be instantly visible to thousands of potential adopters.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item border-0 mb-3 bg-light rounded-4 overflow-hidden">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed bg-transparent fw-bold py-4 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                            What happens when I report a rescue?
+                        </button>
+                    </h2>
+                    <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body text-muted pb-4">
+                            Your report is broadcasted to all verified NGOs nearby. You will receive notifications as soon as an NGO accepts the mission and begins their journey to the location.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

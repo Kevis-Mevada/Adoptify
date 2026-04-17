@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Animal Listing | Adoptify</title>
+    <!-- CSS Dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/css/style.css">
+    <link rel="stylesheet" href="../asset/css/add-animal.css">
+    <link rel="stylesheet" href="../asset/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
+                <img src="../asset/Images/logo.png" alt="Adoptify Logo">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-lg-flex" id="nav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="browse.html">Browse</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="listed-animals.html">My Listings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-lg-10">
+                <a href="listed-animals.html" class="btn btn-link text-decoration-none text-muted mb-3"><i class="fa-solid fa-arrow-left me-2"></i> Back to Listings</a>
+                <h1 class="fw-black display-5 mb-2">Edit Listing</h1>
+                <p class="text-muted fs-5">Update your pet's information</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <form id="editAnimalForm">
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-pencil"></i> Information</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Animal Name *</label>
+                                <input type="text" name="name" class="form-control" required id="e-name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Species *</label>
+                                <select name="species" class="form-select" required id="e-species">
+                                    <option value="DOG">Dog</option>
+                                    <option value="CAT">Cat</option>
+                                    <option value="RABBIT">Rabbit</option>
+                                    <option value="BIRD">Bird</option>
+                                    <option value="OTHER">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Breed</label>
+                                <input type="text" name="breed" class="form-control" id="e-breed">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Age</label>
+                                <input type="text" name="age" class="form-control" placeholder="e.g. 2 years" id="e-age">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Gender</label>
+                                <select name="gender" class="form-select" id="e-gender">
+                                    <option value="MALE">Male</option>
+                                    <option value="FEMALE">Female</option>
+                                    <option value="UNKNOWN">Unknown</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Size</label>
+                                <select name="size" class="form-select" id="e-size">
+                                    <option value="SMALL">Small</option>
+                                    <option value="MEDIUM">Medium</option>
+                                    <option value="LARGE">Large</option>
+                                    <option value="EXTRA_LARGE">Extra Large</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Color</label>
+                                <input type="text" name="color" class="form-control" id="e-color">
+                            </div>
+                             <div class="col-md-4">
+                                <label class="form-label">Adoption Status</label>
+                                <select name="status" class="form-select" id="e-status">
+                                    <option value="AVAILABLE">Available</option>
+                                    <option value="PENDING">Pending</option>
+                                    <option value="ADOPTED">Adopted</option>
+                                    <option value="HOLD">On Hold</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Description *</label>
+                                <textarea name="description" class="form-control" rows="5" required id="e-desc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title"><i class="fa-solid fa-heart-pulse"></i> Health & Location</h3>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="form-label">Health Info (Vaccinated, Neutered, etc.)</label>
+                                <input type="text" name="healthInfo" class="form-control" id="e-health">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Location (e.g. Surat, Gujarat)</label>
+                                <input type="text" name="location" class="form-control" id="e-loc">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-brand px-5 py-3 rounded-pill shadow fw-bold">UPDATE LISTING</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../asset/js/edit-animal.js"></script>
+</body>
+</html>
