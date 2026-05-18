@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             root.innerHTML = data.content.map(report => {
-                const steps = ['PENDING', 'ASSIGNED', 'EN_ROUTE', 'RESCUED', 'COMPLETED'];
+                const steps = ['PENDING', 'ASSIGNED', 'EN_ROUTE', 'ARRIVED', 'RESCUED', 'COMPLETED'];
                 const currentIndex = steps.indexOf(report.status);
                 const isUrgent = report.emergencyLevel === 'CRITICAL';
                 

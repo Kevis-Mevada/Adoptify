@@ -91,12 +91,13 @@ public class AdminService {
             throw new RuntimeException("User is not an NGO");
         }
 
-        ngo.setIsVerified(false);
-        ngo.setRescueEnabled(false);
-        ngo.setVerificationRemarks(reason);
-        userRepository.save(ngo);
-
         emailService.sendNGORejectionEmail(ngo, reason);
+        
+        // Delete dependencies that are safe to remove
+        passwordResetTokenRepository.deleteByUser(ngo);
+
+        // Delete the user completely as requested
+        userRepository.delete(ngo);
     }
 
     public List<RescueReport> getAllRescueReports() {

@@ -172,11 +172,21 @@ async function loadAcceptedRescues() {
                             <p class="x-small text-muted mb-0"><b>Reporter:</b> ${a.reporterName} | <b>Phone:</b> ${a.reporterPhone}</p>
                         </div>
                         <div class="col-md-4 d-flex flex-column justify-content-center gap-2">
-                            ${a.status === 'ASSIGNED' ? 
-                                `<button class="btn btn-primary btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'EN_ROUTE')">START RESCUE <i class="fa-solid fa-truck-fast ms-1"></i></button>` : 
-                                `<button class="btn btn-success btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'COMPLETED')">MARK AS COMPLETED <i class="fa-solid fa-check-circle ms-1"></i></button>`
-                            }
-                            <div class="d-flex gap-2">
+                            ${(() => {
+                                switch(a.status) {
+                                    case 'ASSIGNED':
+                                        return `<button class="btn btn-primary btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'EN_ROUTE')">START RESCUE <i class="fa-solid fa-truck-fast ms-1"></i></button>`;
+                                    case 'EN_ROUTE':
+                                        return `<button class="btn btn-warning btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'ARRIVED')">MARK AS ARRIVED <i class="fa-solid fa-location-dot ms-1"></i></button>`;
+                                    case 'ARRIVED':
+                                        return `<button class="btn btn-success btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'RESCUED')">ANIMAL SECURED <i class="fa-solid fa-paw ms-1"></i></button>`;
+                                    case 'RESCUED':
+                                        return `<button class="btn btn-dark btn-sm fw-bold py-2" onclick="updateStatus(${a.id}, 'COMPLETED')">COMPLETE MISSION <i class="fa-solid fa-check-double ms-1"></i></button>`;
+                                    default:
+                                        return `<button class="btn btn-secondary btn-sm fw-bold py-2" disabled>${a.status}</button>`;
+                                }
+                            })()}
+                            <div class="d-flex gap-2 mt-1">
                                 <a href="https://www.google.com/maps/dir/?api=1&destination=${a.latitude},${a.longitude}" target="_blank" class="btn btn-light btn-sm flex-fill fw-bold"><i class="fa-solid fa-map-location-dot"></i> MAP</a>
                                 <button class="btn btn-light btn-sm flex-fill fw-bold" onclick="viewDetails(${a.id})">DETAILS</button>
                             </div>

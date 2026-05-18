@@ -117,6 +117,13 @@ public class RescueController {
         return ResponseEntity.ok(rescueService.updateRescueStatus(id, status));
     }
 
+    @PutMapping("/test/{id}/status")
+    public ResponseEntity<RescueReport> testUpdateRescueStatus(@PathVariable("id") Long id,
+            @RequestBody java.util.Map<String, String> body) {
+        RescueStatus status = RescueStatus.valueOf(body.get("status"));
+        return ResponseEntity.ok(rescueService.updateRescueStatus(id, status));
+    }
+
     @GetMapping("/stats")
     @PreAuthorize("hasRole('NGO')")
     public ResponseEntity<java.util.Map<String, Object>> getNgoStats(Authentication authentication) {

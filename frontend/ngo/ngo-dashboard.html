@@ -17,28 +17,121 @@
     <link rel="stylesheet" href="../asset/css/style.css">
     <link rel="stylesheet" href="../asset/css/responsive.css">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f6; }
-        .stats-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .stats-card h3 { font-weight: 800; margin-bottom: 0.25rem; }
-        .stats-card p { font-size: 0.85rem; color: #6c757d; margin: 0; font-weight: 600; }
-        .nav-tabs { border: none; gap: 1rem; margin-bottom: 2rem; }
-        .nav-tabs .nav-link { border: 1px solid #dee2e6; border-radius: 10px; color: #6c757d; font-weight: 600; background: #fff; padding: 0.75rem 1.5rem; }
-        .nav-tabs .nav-link.active { background: #ffc107; color: #000; border-color: #ffc107; }
-        .rescue-card { background: #fff; border: 1px solid #dee2e6; border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem; position: relative; }
-        .emergency-badge { position: absolute; top: 1.5rem; right: 1.5rem; padding: 0.25rem 0.75rem; border-radius: 50rem; font-size: 0.7rem; font-weight: 800; }
-        .badge-immediate { background-color: #dc3545; color: #fff; }
-        .badge-urgent { background-color: #fd7e14; color: #fff; }
-        .badge-normal { background-color: #198754; color: #fff; }
-        .status-badge { padding: 0.25rem 1rem; border-radius: 50rem; font-size: 0.75rem; font-weight: 700; }
-        .btn-status { font-size: 0.75rem; font-weight: 700; border-radius: 50rem; padding: 0.4rem 1rem; }
-        .verification-warning { background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; }
-        .verification-badge { color: #198754; font-size: 0.9rem; font-weight: 700; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+        }
+
+        .stats-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .stats-card h3 {
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .stats-card p {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .nav-tabs {
+            border: none;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs .nav-link {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            color: #6c757d;
+            font-weight: 600;
+            background: #fff;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: #ffc107;
+            color: #000;
+            border-color: #ffc107;
+        }
+
+        .rescue-card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .emergency-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        .badge-immediate {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .badge-urgent {
+            background-color: #fd7e14;
+            color: #fff;
+        }
+
+        .badge-normal {
+            background-color: #198754;
+            color: #fff;
+        }
+
+        .status-badge {
+            padding: 0.25rem 1rem;
+            border-radius: 50rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .btn-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50rem;
+            padding: 0.4rem 1rem;
+        }
+
+        .verification-warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .verification-badge {
+            color: #198754;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
     </style>
 </head>
 
 <body>
     <!-- Navigation -->
-   <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="../index.html">
                 <img src="../asset/Images/logo.png" alt="Adoptify Logo" style="height: 40px;">
@@ -50,32 +143,7 @@
             </button>
 
             <div class="collapse navbar-collapse d-lg-flex align-items-center" id="navbarMain">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-4 align-items-center">
-                    <li class="nav-item"><a class="nav-link active" href="../index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../animals/browse.html">Adopt Animal</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="animalActionDrop" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Actions
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="animalActionDrop">
-                            <li><a class="dropdown-item" href="../animals/add-animal.html">Add Animal</a></li>
-                            <li><a class="dropdown-item active" href="rescue.html">Rescue Animal</a></li>
-                            <li><a class="dropdown-item" href="../animals/listed-animals.html">Listed Animals</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navDrop" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Adoption Request
-                        </a>
-                        <ul class="dropdown-menu border-0 shadow-sm rounded-4 py-3" aria-labelledby="navDrop">
-                            <li><a class="dropdown-item" href="../animals/sent-requests.html">Send Request</a></li>
-                            <li><a class="dropdown-item" href="../animals/received-requests.html">Received Request</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+
 
                 <div class="d-flex align-items-center gap-3 ms-lg-auto">
                     <div id="auth-section" class="d-flex align-items-center gap-2">
@@ -103,7 +171,8 @@
         <h2 class="fw-bold mb-4">NGO Dashboard</h2>
 
         <div id="verification-msg" class="verification-warning d-none">
-            <i class="fa-solid fa-triangle-exclamation me-2"></i> Your NGO account is pending verification. You cannot accept rescues until verified.
+            <i class="fa-solid fa-triangle-exclamation me-2"></i> Your NGO account is pending verification. You cannot
+            accept rescues until verified.
         </div>
 
         <!-- Stats row -->
@@ -136,9 +205,12 @@
 
         <!-- Tabs -->
         <ul class="nav nav-tabs" id="ngoTabs" role="tablist">
-            <li class="nav-item"><button class="nav-link active" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#tab-alerts">Rescue Alerts</button></li>
-            <li class="nav-item"><button class="nav-link" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#tab-accepted">Accepted Rescues</button></li>
-            <li class="nav-item"><button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#tab-history">History</button></li>
+            <li class="nav-item"><button class="nav-link active" id="alerts-tab" data-bs-toggle="tab"
+                    data-bs-target="#tab-alerts">Rescue Alerts</button></li>
+            <li class="nav-item"><button class="nav-link" id="accepted-tab" data-bs-toggle="tab"
+                    data-bs-target="#tab-accepted">Accepted Rescues</button></li>
+            <li class="nav-item"><button class="nav-link" id="history-tab" data-bs-toggle="tab"
+                    data-bs-target="#tab-history">History</button></li>
         </ul>
 
         <div class="tab-content">
@@ -169,7 +241,8 @@
                         <tbody id="historyTableBody" class="small"></tbody>
                     </table>
                 </div>
-                <div id="historyPagination" class="d-flex justify-content-between align-items-center mt-3 small text-muted"></div>
+                <div id="historyPagination"
+                    class="d-flex justify-content-between align-items-center mt-3 small text-muted"></div>
             </div>
         </div>
     </main>
@@ -188,7 +261,8 @@
                     <input type="datetime-local" id="etaInput" class="form-control" required>
                 </div>
                 <div class="modal-footer border-0 p-4">
-                    <button type="button" class="btn btn-warning w-100 py-2 fw-bold" onclick="confirmAccept()">Confirm Accept</button>
+                    <button type="button" class="btn btn-warning w-100 py-2 fw-bold" onclick="confirmAccept()">Confirm
+                        Accept</button>
                 </div>
             </div>
         </div>
@@ -207,7 +281,8 @@
                     <textarea id="rejectReason" class="form-control" rows="3" required></textarea>
                 </div>
                 <div class="modal-footer border-0 p-4">
-                    <button type="button" class="btn btn-brand w-100 py-2 fw-bold" onclick="confirmReject()">Confirm Reject</button>
+                    <button type="button" class="btn btn-brand w-100 py-2 fw-bold" onclick="confirmReject()">Confirm
+                        Reject</button>
                 </div>
             </div>
         </div>

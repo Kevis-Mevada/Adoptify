@@ -369,15 +369,17 @@ public class RescueService {
                 .orElseThrow(() -> new ResourceNotFoundException("NGO not found"));
                 
         List<RescueResponse> allResponses = rescueResponseRepository.findByResponderId(ngoId);
-        List<RescueResponse> accepted = allResponses.stream()
-                .filter(r -> r.getResponseStatus() == ResponseStatus.ACCEPTED)
+        
+        // Include both active (ACCEPTED) and finished (COMPLETED) missions
+        List<RescueResponse> acceptedAndCompleted = allResponses.stream()
+                .filter(r -> r.getResponseStatus() == ResponseStatus.ACCEPTED || r.getResponseStatus() == ResponseStatus.COMPLETED)
                 .toList();
 
-        long completedCount = accepted.stream()
-                .filter(r -> r.getRescueReport().getStatus() == RescueStatus.COMPLETED)
+        long completedCount = acceptedAndCompleted.stream()
+                .filter(r -> r.getResponseStatus() == ResponseStatus.COMPLETED)
                 .count();
 
-        double avgRating = accepted.stream()
+        double avgRating = acceptedAndCompleted.stream()
                 .filter(r -> r.getRescueReport().getRating() != null)
                 .mapToDouble(r -> r.getRescueReport().getRating())
                 .average()
@@ -401,7 +403,7 @@ public class RescueService {
                 .count();
 
         return java.util.Map.of(
-            "totalAccepted", accepted.size(),
+            "totalAccepted", acceptedAndCompleted.size(),
             "completedCount", completedCount,
             "pendingAlerts", nearbyAlerts,
             "averageRating", String.format("%.1f", avgRating)
