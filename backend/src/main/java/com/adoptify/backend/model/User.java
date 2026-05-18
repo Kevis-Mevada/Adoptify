@@ -58,6 +58,31 @@ public class User {
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<Animal> animals = new java.util.ArrayList<>();
+
+    @OneToMany(mappedBy = "adopter", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<AdoptionRequest> adoptionRequests = new java.util.ArrayList<>();
+
+    @OneToMany(mappedBy = "responder", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<RescueResponse> rescueResponses = new java.util.ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<Notification> notifications = new java.util.ArrayList<>();
+
+    @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<RescueReport> rescueReports = new java.util.ArrayList<>();
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

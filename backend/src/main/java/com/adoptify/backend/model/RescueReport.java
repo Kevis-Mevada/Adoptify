@@ -70,6 +70,11 @@ public class RescueReport {
     private LocalDateTime updatedAt;
     private LocalDateTime resolvedAt;
 
+    @OneToMany(mappedBy = "rescueReport", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private java.util.List<RescueResponse> rescueResponses = new java.util.ArrayList<>();
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
